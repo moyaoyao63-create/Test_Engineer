@@ -8,7 +8,7 @@ const menuToggle = document.querySelector('#menu-toggle');
 const mobileMenu = document.querySelector('#mobile-menu');
 const video = document.querySelector('#scrub-video');
 const portraitStage = document.querySelector('.portrait-stage');
-const characterWrap = document.querySelector('#character-wrap');
+const gazeLayer = document.querySelector('#gaze-layer');
 
 const modalData = {
   projects: {
@@ -136,43 +136,41 @@ let targetX = 0;
 let targetY = 0;
 let currentX = 0;
 let currentY = 0;
-let targetFollowX = 0;
-let targetFollowY = 0;
-let currentFollowX = 0;
-let currentFollowY = 0;
+let targetGazeX = 0;
+let targetGazeY = 0;
+let currentGazeX = 0;
+let currentGazeY = 0;
 let prevMouseX = null;
 let targetVideoTime = 0;
 let seekQueued = false;
-let waveTimer;
 
 function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
 }
 
-function updateCharacterTarget(clientX, clientY) {
-  if (!portraitStage || !characterWrap) return;
+function updateGazeTarget(clientX, clientY) {
+  if (!portraitStage || !gazeLayer) return;
   const rect = portraitStage.getBoundingClientRect();
   const centerX = rect.left + rect.width / 2;
   const centerY = rect.top + rect.height / 2;
   const normalizedX = clamp((clientX - centerX) / (rect.width / 2), -1, 1);
   const normalizedY = clamp((clientY - centerY) / (rect.height / 2), -1, 1);
-  const rangeX = Math.min(68, rect.width * .12);
-  const rangeY = Math.min(42, rect.height * .08);
-  targetFollowX = normalizedX * rangeX;
-  targetFollowY = normalizedY * rangeY;
-  characterWrap.classList.toggle('is-alt', normalizedX < -.42);
+  const rangeX = Math.min(7, rect.width * .018);
+  const rangeY = Math.min(5, rect.height * .012);
+  targetGazeX = normalizedX * rangeX;
+  targetGazeY = normalizedY * rangeY;
 }
 
 function animatePointer() {
   currentX += (targetX - currentX) * .08;
   currentY += (targetY - currentY) * .08;
-  currentFollowX += (targetFollowX - currentFollowX) * .09;
-  currentFollowY += (targetFollowY - currentFollowY) * .09;
+  currentGazeX += (targetGazeX - currentGazeX) * .12;
+  currentGazeY += (targetGazeY - currentGazeY) * .12;
   document.documentElement.style.setProperty('--mx', currentX.toFixed(3));
   document.documentElement.style.setProperty('--my', currentY.toFixed(3));
-  if (characterWrap) {
-    characterWrap.style.setProperty('--follow-x', `${currentFollowX.toFixed(2)}px`);
-    characterWrap.style.setProperty('--follow-y', `${currentFollowY.toFixed(2)}px`);
+  if (gazeLayer) {
+    gazeLayer.style.setProperty('--gaze-x', `${currentGazeX.toFixed(2)}px`);
+    gazeLayer.style.setProperty('--gaze-y', `${currentGazeY.toFixed(2)}px`);
   }
   requestAnimationFrame(animatePointer);
 }
@@ -196,7 +194,7 @@ window.addEventListener('mousemove', (event) => {
   const halfHeight = Math.max(window.innerHeight / 2, 1);
   targetX = (event.clientX - halfWidth) / halfWidth;
   targetY = (event.clientY - halfHeight) / halfHeight;
-  updateCharacterTarget(event.clientX, event.clientY);
+  updateGazeTarget(event.clientX, event.clientY);
   if (prevMouseX !== null && Number.isFinite(video.duration) && video.duration > 0) {
     const delta = event.clientX - prevMouseX;
     targetVideoTime = Math.max(0, Math.min(video.duration, targetVideoTime + (delta / window.innerWidth) * .8 * video.duration));
@@ -207,16 +205,7 @@ window.addEventListener('mousemove', (event) => {
 
 window.addEventListener('mouseleave', () => {
   prevMouseX = null;
-  targetFollowX = 0;
-  targetFollowY = 0;
-  if (characterWrap) characterWrap.classList.remove('is-alt');
+  targetGazeX = 0;
+  targetGazeY = 0;
 });
-
-if (characterWrap) {
-  characterWrap.addEventListener('pointerdown', () => {
-    characterWrap.classList.add('is-waving');
-    window.clearTimeout(waveTimer);
-    waveTimer = window.setTimeout(() => characterWrap.classList.remove('is-waving'), 900);
-  });
-}
 animatePointer();
