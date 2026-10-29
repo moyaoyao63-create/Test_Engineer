@@ -10,6 +10,8 @@ const video = document.querySelector('#scrub-video');
 const portraitStage = document.querySelector('.portrait-stage');
 const gazeLayer = document.querySelector('#gaze-layer');
 
+const VIDEO_SEEK_SENSITIVITY = 0.8;
+
 const modalData = {
   projects: {
     kicker: '01 / PROJECTS',
@@ -143,6 +145,7 @@ let currentGazeY = 0;
 let prevMouseX = null;
 let targetVideoTime = 0;
 let seekQueued = false;
+let videoReady = false;
 
 function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
@@ -176,18 +179,21 @@ function animatePointer() {
 }
 
 function requestVideoSeek() {
-  if (!video || !Number.isFinite(video.duration) || video.duration <= 0 || seekQueued) return;
+  if (!video || !videoReady || !Number.isFinite(video.duration) || video.duration <= 0 || seekQueued) return;
   seekQueued = true;
-  video.currentTime = Math.max(0, Math.min(video.duration, targetVideoTime));
+  video.currentTime = clamp(targetVideoTime, 0, video.duration);
 }
 
 video.addEventListener('loadedmetadata', () => {
+  videoReady = Number.isFinite(video.duration) && video.duration > 0;
   targetVideoTime = video.currentTime;
+  video.pause();
 });
 video.addEventListener('seeked', () => {
   seekQueued = false;
   if (Math.abs(video.currentTime - targetVideoTime) > .02) requestVideoSeek();
 });
+video.addEventListener('error', () => { videoReady = false; });
 
 window.addEventListener('mousemove', (event) => {
   const halfWidth = Math.max(window.innerWidth / 2, 1);
@@ -195,9 +201,10 @@ window.addEventListener('mousemove', (event) => {
   targetX = (event.clientX - halfWidth) / halfWidth;
   targetY = (event.clientY - halfHeight) / halfHeight;
   updateGazeTarget(event.clientX, event.clientY);
-  if (prevMouseX !== null && Number.isFinite(video.duration) && video.duration > 0) {
+  if (prevMouseX !== null && videoReady && Number.isFinite(video.duration) && video.duration > 0) {
     const delta = event.clientX - prevMouseX;
-    targetVideoTime = Math.max(0, Math.min(video.duration, targetVideoTime + (delta / window.innerWidth) * .8 * video.duration));
+    const relativeDelta = delta / Math.max(window.innerWidth, 1);
+    targetVideoTime = clamp(targetVideoTime + relativeDelta * VIDEO_SEEK_SENSITIVITY * video.duration, 0, video.duration);
     requestVideoSeek();
   }
   prevMouseX = event.clientX;
