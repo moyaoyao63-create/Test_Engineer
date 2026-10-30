@@ -123,20 +123,6 @@ a { color: inherit; text-decoration: none; }
 .hero-meta { display: flex; align-items: center; gap: 11px; margin-top: 38px; color: var(--muted); font: 10px var(--mono); letter-spacing: .09em; }
 .meta-line { width: 52px; height: 1px; background: var(--ink); opacity: .55; }
 
-.portrait-stage { position: absolute; z-index: 1; top: 18%; left: 50%; width: min(510px, 42vw); height: min(650px, 69vh); transform: translateX(-50%); }
-.portrait-halo { position: absolute; inset: 4% 6%; border-radius: 48% 52% 44% 56%; background: linear-gradient(145deg, rgba(255, 255, 255, .9), rgba(228, 222, 214, .22)); box-shadow: 0 35px 80px rgba(37, 31, 28, .13); transform: rotate(5deg) translate3d(calc(var(--mx, 0) * 10px), calc(var(--my, 0) * 7px), 0); transition: transform .8s cubic-bezier(.2,.8,.2,1); }
-.portrait-frame { position: absolute; inset: 0; overflow: visible; border-radius: 0; transform: rotate(3deg); transition: transform .8s cubic-bezier(.2,.8,.2,1); }
-.character-wrap { position: absolute; inset: -12% -18% -10%; display: grid; place-items: stretch; pointer-events: none; }
-.character { grid-area: 1 / 1; width: 100%; height: 100%; object-fit: contain; object-position: center bottom; opacity: 0; filter: drop-shadow(0 26px 24px rgba(46, 34, 28, .18)); transition: opacity .35s ease; user-select: none; pointer-events: none; }
-.character.is-visible { opacity: 1; }
-.gaze-layer { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
-.gaze-pupil { position: absolute; width: clamp(9px, 1.25vw, 16px); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 34% 28%, #fff 0 10%, #5a3d33 12% 45%, #160f0d 58% 100%); box-shadow: 0 0 0 1px rgba(80, 48, 39, .2); transform: translate3d(var(--gaze-x, 0px), var(--gaze-y, 0px), 0); transition: transform .12s linear; }
-.gaze-pupil-left { left: 49.2%; top: 39.3%; }
-.gaze-pupil-right { left: 59.8%; top: 35.3%; }
-.portrait-label { position: absolute; z-index: 2; color: rgba(23,23,23,.48); font: 11px var(--mono); line-height: 1.45; letter-spacing: .12em; }
-.portrait-label-top { top: 8%; right: -5%; transform: rotate(12deg); }
-.portrait-label-bottom { bottom: 6%; left: -12%; transform: rotate(-12deg); text-align: right; }
-
 .ticket-dock { position: absolute; z-index: 5; inset: 0; pointer-events: none; }
 .ticket { position: absolute; display: block; width: clamp(240px, 22vw, 330px); min-height: 185px; padding: 19px 24px 22px; border: 3px solid var(--ink); border-radius: 12px; color: var(--ink); background: rgba(255, 255, 255, .82); box-shadow: 14px 21px 0 rgba(23, 23, 23, .08), 0 16px 30px rgba(23, 23, 23, .13); text-align: left; pointer-events: auto; transform: rotate(var(--rotation)) translate3d(calc(var(--mx, 0) * var(--depth) * 8px), calc(var(--my, 0) * var(--depth) * 8px), 0); transition: box-shadow .25s ease, background .25s ease, transform .5s cubic-bezier(.2,.8,.2,1); }
 .ticket::before, .ticket::after { content: ''; position: absolute; top: 52%; width: 22px; height: 44px; border: 3px solid var(--ink); border-radius: 50%; background: var(--paper); transform: translateY(-50%); }
@@ -206,7 +192,6 @@ body.modal-open { overflow: hidden; }
   .mobile-menu.is-open { opacity: 1; visibility: visible; pointer-events: auto; }
   .mobile-menu a { width: max-content; font-size: 32px; font-weight: 800; letter-spacing: -.08em; }
   .hero { height: auto; min-height: 100svh; padding-top: 110px; padding-bottom: 92px; overflow: visible; }
-  .portrait-stage { top: 13%; left: 59%; width: min(510px, 53vw); height: 520px; opacity: .9; }
   .hero-copy { position: relative; left: auto; bottom: auto; z-index: 4; width: min(560px, 70vw); margin-top: 44vh; }
   .ticket-dock { position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 62px; pointer-events: auto; }
   .ticket { position: relative; inset: auto; width: 100%; min-height: 170px; transform: rotate(var(--rotation)); }
@@ -219,11 +204,6 @@ body.modal-open { overflow: hidden; }
   .site-header { padding: 18px 18px; }
   .brand { font-size: 21px; }
   .hero { padding: 94px 18px 70px; }
-  .portrait-stage { top: 11%; left: 50%; width: 76vw; height: 410px; opacity: .72; }
-  .character-wrap { inset: -10% -16% -7%; }
-  .portrait-label { font-size: 9px; }
-  .portrait-label-top { right: -14%; }
-  .portrait-label-bottom { left: -16%; }
   .hero-copy { width: 100%; margin-top: 360px; }
   .hero h1 { font-size: clamp(45px, 15vw, 72px); }
   .hero-description { margin-top: 18px; font-size: 16px; }
