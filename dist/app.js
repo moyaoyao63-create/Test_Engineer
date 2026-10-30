@@ -1,190 +1,212 @@
-const modal = document.querySelector('#portfolio-modal');
-const modalTitle = document.querySelector('#modal-title');
-const modalKicker = document.querySelector('#modal-kicker');
-const modalIntro = document.querySelector('#modal-intro');
-const modalContent = document.querySelector('#modal-content');
-const modalClose = document.querySelector('#modal-close');
-const menuToggle = document.querySelector('#menu-toggle');
-const mobileMenu = document.querySelector('#mobile-menu');
-const video = document.querySelector('#scrub-video');
+/* Moyao / PORTFOLIO —— 内容全部来自 dist/assets/简历.docx，未添加虚构信息 */
+(function () {
+  "use strict";
 
-const VIDEO_SEEK_SENSITIVITY = 0.8;
+  /* ================= 简历数据 ================= */
+  var DATA = {
+    projects: {
+      no: "01", en: "PROJECTS", title: "项目经历",
+      html:
+        entry("需求数据清洗与结构化处理系统", "2025年12月 ~ 2026年3月", "测试开发工程师",
+          "Python / Dify Workflow / LLM / Prompt Engineering / JSON / API",
+          "针对业务需求文件格式不统一、人工提取需求信息耗时、测试数据整理成本高等问题，基于 Dify 搭建自动化数据处理工作流，实现多格式需求文件解析、数据清洗、结构化转换、AI 信息抽取、数据校验及 Excel 导出。",
+          [
+            "<b>Workflow 架构设计：</b>基于 Dify 设计多分支 AI 工作流，结合条件判断、文件解析、Python 代码执行、变量聚合及 LLM 节点，构建从需求文件接入到测试用例输出的自动化处理链路。",
+            "<b>多格式数据解析：</b>针对 Excel/CSV、文档及图片等输入类型设计差异化解析流程，通过数据清洗、字段结构转换及统一 JSON 输出，解决多源需求数据结构不一致的问题。",
+            "<b>需求数据清洗与标准化：</b>基于 Python 构建字段映射、空值过滤及去重规则，将原始内容转换为统一 JSON Schema，并通过异常记录筛选与规则校验提高数据可用性。",
+            "<b>LLM 信息抽取与结构化处理：</b>针对长文本需求设计内容分块、需求事实抽取与 JSON 解析流程，通过 Prompt 约束模型输出结构，并结合规则清洗、编号分组等节点组织需求数据。",
+            "<b>数据质量校验及需求覆盖检查：</b>对需求数据与生成的测试用例进行关联检查，整理覆盖结果及报告数据。",
+            "<b>自动化数据交付：</b>将处理结果汇总、编号并转换为 XLSX 文件，形成从原始需求输入到结构化数据输出的自动化处理链路。",
+            "<b>工作流服务集成：</b>通过 Dify Workflow API 对接外部测试平台，实现业务需求提交、工作流调用、结果获取及文件导出，推动 AI 能力在业务场景中落地。"
+          ]) +
+        entry("自动化测试平台", "2025年4月 ~ 2025年9月", "测试开发工程师",
+          "React / FastAPI / Python / RESTful API / Docker / Nginx",
+          "针对测试过程中工具分散、数据转换依赖人工操作及测试执行流程繁琐等问题，基于 React + FastAPI 独立设计并开发前后端分离的自动化测试平台。集成 AI 用例生成、CAN 协议转换、CAN 数据模拟发送及自定义数据构造等功能，实现测试工具的统一管理与操作。",
+          [
+            "<b>前后端架构设计与开发：</b>基于 React Hooks 构建模块化单页应用，使用 FastAPI 设计 RESTful API，完成文件上传、参数配置、任务提交、状态轮询、结果预览及文件下载等功能。",
+            "<b>后端接口开发与服务集成：</b>使用 Python + FastAPI 封装业务处理接口，基于 Pydantic 实现请求参数校验，使用 httpx 对接外部 AI 服务，实现 API 请求转发、结果解析及数据返回，并通过环境变量管理 API Key。",
+            "<b>CAN 数据清洗与转换模块开发：</b>基于 Python 开发 CAN 数据处理模块，对非标准 Excel 原始数据进行解析、字段映射、格式清洗及结构化转换，依据 CAN 协议规则完成数据校验与异常识别，自动生成标准 DBC 文件。",
+            "<b>CAN 硬件通信开发：</b>通过 Python ctypes 调用 USBCAN2 厂商 DLL，实现设备双通道初始化、CAN 报文发送及后台线程任务管理，支持任务进度查询与执行中止。",
+            "<b>容器化部署与服务管理：</b>使用 Docker Compose 完成前后端服务容器化部署，配置 Nginx 静态资源服务及 API 反向代理，实现前后端服务的统一访问。"
+          ])
+    },
 
-const modalData = {
-  projects: {
-    kicker: '01 / PROJECTS',
-    title: '项目经历',
-    intro: '把日常的小需求，做成可使用、可理解、可持续的作品。',
-    entries: [
-      { index: '01', title: '个人作品集网站', copy: '以票券式信息架构呈现个人经历，让访客可以快速浏览项目、能力和联系方式。', tags: ['Web Design', 'HTML / CSS', 'Interaction'], action: '查看项目 ↗' },
-      { index: '02', title: '自动化测试工作台', copy: '为测试流程搭建统一入口，把需求分析、用例生成和数据工具串联起来。', tags: ['Product', 'React', 'FastAPI'], action: '项目详情 ↗' },
-      { index: '03', title: 'Hover Translator', copy: '一个帮助观看视频时理解字幕与生词的小工具，强调轻量、及时和不打断。', tags: ['Chrome Extension', 'UX', 'Open Source'], action: '在 GitHub 查看 ↗' },
-    ],
-  },
-  experience: {
-    kicker: '02 / EXPERIENCE',
-    title: '工作经历',
-    intro: '每一次工作，都在训练我把模糊的问题变成清晰的下一步。',
-    entries: [
-      { index: '01', title: '产品 / 设计 / 开发', copy: '目前正在寻找能同时发挥产品思维、视觉表达和工程实现能力的机会。', tags: ['Problem Solving', 'Collaboration', 'Ownership'], action: '工作方式 ↗' },
-      { index: '02', title: '从需求到交付', copy: '习惯先理解真实使用场景，再用原型、代码和反馈循环把方案做实。', tags: ['Research', 'Prototype', 'Ship'], action: '我的方法 ↗' },
-      { index: '03', title: '持续学习', copy: '保持对新工具、新媒介和新协作方式的好奇，边做边建立自己的判断。', tags: ['Curious', 'Iterative', 'Reliable'], action: '继续了解 ↗' },
-    ],
-  },
-  awards: {
-    kicker: '03 / AWARDS',
-    title: '奖项荣誉',
-    intro: '这里先放置占位内容，后续可以替换为真实的奖项、证书与里程碑。',
-    entries: [
-      { index: '01', title: '优秀项目 / 占位', copy: '项目在真实场景中产生了明确的使用价值，并获得团队认可。', tags: ['2025', 'Team Award'], action: '补充内容 ↗' },
-      { index: '02', title: '设计挑战 / 占位', copy: '用有限的时间完成从概念到可交互原型的完整表达。', tags: ['2024', 'Challenge'], action: '补充内容 ↗' },
-      { index: '03', title: '学习证书 / 占位', copy: '持续积累产品、前端与视觉表达相关的知识体系。', tags: ['Learning', 'Growth'], action: '补充内容 ↗' },
-    ],
-  },
-  skills: {
-    kicker: '04 / SKILLS',
-    title: '技能工具',
-    intro: '工具会变化，但我会持续练习理解问题、表达方案和把事情做完。',
-    entries: [
-      { index: '01', title: '设计与原型', copy: 'Figma、信息架构、交互原型、视觉系统与动效思考。', tags: ['Figma', 'Prototyping', 'Visual'], action: '工具清单 ↗' },
-      { index: '02', title: '前端与交互', copy: 'HTML、CSS、JavaScript、React，以及更关注细节的响应式体验。', tags: ['React', 'JavaScript', 'Responsive'], action: '代码能力 ↗' },
-      { index: '03', title: '协作与交付', copy: '需求拆解、文档表达、版本管理、测试和与团队一起解决问题。', tags: ['Git', 'Docs', 'Teamwork'], action: '协作方式 ↗' },
-    ],
-  },
-  life: {
-    kicker: '05 / LIFE',
-    title: '生活记录',
-    intro: '工作之外，我也在观察城市、收集灵感，记录那些让人重新充电的瞬间。',
-    entries: [
-      { index: '01', title: '阅读与观察', copy: '从书、展览、电影和街头细节里寻找新的问题和表达方式。', tags: ['Notes', 'Culture'], action: '生活片段 ↗' },
-      { index: '02', title: '照片与文字', copy: '把还没有答案的想法先记下来，给未来的自己留一条线索。', tags: ['Photo', 'Writing'], action: '稍后补充 ↗' },
-      { index: '03', title: '保持好奇', copy: '希望自己一直有能力被新事物打动，也有耐心把它做成作品。', tags: ['Curiosity', 'Practice'], action: '联系我 ↗' },
-    ],
-  },
-};
+    experience: {
+      no: "02", en: "EXPERIENCE", title: "工作经历",
+      html:
+        '<div class="m-info">' +
+          '<div><b>年龄 / 经验</b>24 岁 · 工作年限 2 年</div>' +
+          '<div><b>毕业院校</b>湖南财政经济学院（一本）</div>' +
+          '<div><b>学历 / 专业</b>全日制本科 · 计算机科学与技术</div>' +
+          '<div><b>求职意向</b>AI数据交付 / AI训练师</div>' +
+        "</div>" +
+        entry("湖南省鼎立电气科技有限公司", "2024年6月 ~ 2026年4月", "测试开发工程师", "", "",
+          [
+            "<b>AI 数据处理与工具建设：</b>参与 AI 测试提效工具开发，基于 Dify 搭建 AI 用例生成 Workflow，完成需求数据输入、API 调用封装、结果处理及结构化输出，推动 AI 能力在实际业务流程中落地。",
+            "<b>数据构造与自动化处理：</b>针对 CAN 协议测试中数据构造及报文配置效率低的问题，使用 Python 开发自动化数据处理工具，实现需求文档数据点向标准 CAN 报文结构及 DBC 文件的自动转换，并支持数据自动发送，测试准备及执行效率提升约 30%。",
+            "<b>数据质量与标准化：</b>梳理历史质量问题及高频异常场景，建立历史缺陷库和专项 CheckList，将质量检查规则进行标准化，推动问题前置发现及流程规范化，同类缺陷重复发生率降低 30%。",
+            "<b>数据校验与自动化：</b>使用 SQL 对业务数据库进行数据查询及一致性校验，并基于 Python + Requests + Pytest 开发接口自动化脚本，实现测试数据处理、接口验证及结果统计。",
+            "<b>质量保障与问题闭环：</b>负责车载终端及物联网平台相关数据和业务流程验证，结合日志、数据库及接口数据进行问题定位，推动异常问题闭环处理。"
+          ]) +
+        entry("自我评价", "", "", "", "",
+          [
+            "具备强烈的自动化与提效意识，擅长利用 AI 工具赋能工作流程，提升数据构造及 Python 脚本开发效率。",
+            "具备扎实的数学基础和逻辑思维能力，擅长从多角度分析软件系统潜在问题，确保测试工作的全面性和准确性。",
+            "具备较强的反思总结与持续学习能力，善于团队合作沟通，情绪稳定，抗压能力强，热情积极。",
+            "具备出色的问题定位与溯源能力，善于结合日志分析与环境仿真攻坚极难复现 Bug；坚持闭环思维，推动缺陷高效修复。"
+          ])
+    },
 
-let lastFocusedElement = null;
+    github: {
+      no: "03", en: "OPEN SOURCE", title: "GitHub 项目",
+      // 简历中暂未提供仓库地址；拿到真实链接后填入下方 url 即可渲染为可点击链接。
+      html:
+        '<p class="m-note">以下项目均已完成开发实践，仓库链接整理中，随后补充。</p>' +
+        repo("需求数据清洗与结构化处理系统",
+          "基于 Dify 的自动化数据处理工作流：多格式需求文件解析、数据清洗、LLM 信息抽取与 XLSX 自动化导出。",
+          "Python · Dify Workflow · LLM · Prompt Engineering") +
+        repo("自动化测试平台",
+          "React + FastAPI 前后端分离的一站式测试工具平台：AI 用例生成、CAN 协议转换、CAN 数据模拟发送与自定义数据构造。",
+          "React · FastAPI · Python · Docker · Nginx")
+    },
 
-function renderModal(key) {
-  const data = modalData[key] || modalData.projects;
-  modalKicker.textContent = data.kicker;
-  modalTitle.textContent = data.title;
-  modalIntro.textContent = data.intro;
-  modalContent.innerHTML = data.entries.map((entry) => `
-    <article class="modal-entry">
-      <span class="entry-index">${entry.index}</span>
-      <div class="entry-body">
-        <h3>${entry.title}</h3>
-        <p>${entry.copy}</p>
-        <div class="entry-tags">${entry.tags.map((tag) => `<span>${tag}</span>`).join('')}</div>
-      </div>
-      <a class="entry-action" href="mailto:hello@example.com?subject=${encodeURIComponent(entry.title)}">${entry.action}</a>
-    </article>
-  `).join('');
-}
+    skills: {
+      no: "04", en: "SKILLS", title: "技能工具",
+      html:
+        entry("专业技能", "", "", "", "",
+          [
+            "<b>Python 数据处理：</b>使用 Python 编写数据处理及自动化脚本，完成数据解析、转换、构造、批量处理及结果输出。",
+            "<b>数据质量与校验：</b>熟悉数据完整性、准确性、一致性等质量校验思路，能够通过 Python、SQL 对业务数据进行校验、异常识别及结果统计。",
+            "<b>SQL / 数据库：</b>熟悉 MySQL，能够使用 SQL 完成数据查询、条件筛选、聚合统计及多表关联，并进行业务数据一致性校验。",
+            "<b>AI 数据处理：</b>具备 AI skill 测试及 Workflow 实践经验，基于 Dify 搭建测试用例生成工作流，完成需求数据输入、API 调用封装、结果处理及 Markdown 数据导出。",
+            "<b>数据自动化：</b>曾使用 Python 将需求文档中的数据点自动转换为标准 CAN 报文结构及 DBC 文件，并实现自动化发送。",
+            "<b>数据质量标准化：</b>具备质量规则梳理、CheckList 建设及流程标准化经验，能够通过规范化规则提升数据及项目执行的一致性。",
+            "<b>工具与协作：</b>熟悉 Git、Linux 常用操作，具备跨团队协作及问题定位能力。",
+            "<b>软件测试基础：</b>熟悉软件测试流程、缺陷生命周期及常见测试设计方法，具备接口、数据库、自动化测试实践经验。",
+            "<b>AI 工具应用能力：</b>熟悉 ChatGPT、Codex 等主流 AI 工具，具备 AI 辅助编程与工程实践经验，能够运用 AI 完成需求分析、技术方案设计、代码生成、问题排查及代码优化。"
+          ]) +
+        entry("获得证书", "", "", "", "",
+          [
+            "英语六级（CET-6）564 · 软考中级 · C1 驾驶证 · 计算机二级",
+            "省级优秀毕业生 · 国家奖学金 · 国家励志奖学金 · 创新创业大赛省级奖项 · 绩点 3.96/4.0"
+          ])
+    }
+  };
 
-function openModal(key) {
-  lastFocusedElement = document.activeElement;
-  renderModal(key);
-  modal.classList.add('is-open');
-  modal.setAttribute('aria-hidden', 'false');
-  document.body.classList.add('modal-open');
-  window.setTimeout(() => modalClose.focus(), 30);
-}
-
-function closeModal() {
-  modal.classList.remove('is-open');
-  modal.setAttribute('aria-hidden', 'true');
-  document.body.classList.remove('modal-open');
-  if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') lastFocusedElement.focus();
-}
-
-document.querySelectorAll('[data-ticket], [data-open-modal]').forEach((element) => {
-  element.addEventListener('click', () => {
-    const key = element.dataset.ticket || element.dataset.openModal;
-    closeMobileMenu();
-    openModal(key);
-  });
-});
-
-modalClose.addEventListener('click', closeModal);
-modal.querySelector('[data-close-modal]').addEventListener('click', closeModal);
-document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
-});
-
-function closeMobileMenu() {
-  menuToggle.classList.remove('is-open');
-  menuToggle.setAttribute('aria-expanded', 'false');
-  mobileMenu.classList.remove('is-open');
-  mobileMenu.setAttribute('aria-hidden', 'true');
-  document.body.classList.remove('modal-open');
-}
-
-menuToggle.addEventListener('click', () => {
-  const isOpen = !menuToggle.classList.contains('is-open');
-  menuToggle.classList.toggle('is-open', isOpen);
-  menuToggle.setAttribute('aria-expanded', String(isOpen));
-  mobileMenu.classList.toggle('is-open', isOpen);
-  mobileMenu.setAttribute('aria-hidden', String(!isOpen));
-  document.body.classList.toggle('modal-open', isOpen);
-});
-
-mobileMenu.querySelectorAll('a:not([data-open-modal])').forEach((link) => link.addEventListener('click', closeMobileMenu));
-
-let targetX = 0;
-let targetY = 0;
-let currentX = 0;
-let currentY = 0;
-let prevMouseX = null;
-let targetVideoTime = 0;
-let seekQueued = false;
-let videoReady = false;
-
-function clamp(value, min, max) {
-  return Math.max(min, Math.min(max, value));
-}
-
-function animatePointer() {
-  currentX += (targetX - currentX) * .08;
-  currentY += (targetY - currentY) * .08;
-  document.documentElement.style.setProperty('--mx', currentX.toFixed(3));
-  document.documentElement.style.setProperty('--my', currentY.toFixed(3));
-  requestAnimationFrame(animatePointer);
-}
-
-function requestVideoSeek() {
-  if (!video || !videoReady || !Number.isFinite(video.duration) || video.duration <= 0 || seekQueued) return;
-  seekQueued = true;
-  video.currentTime = clamp(targetVideoTime, 0, video.duration);
-}
-
-video.addEventListener('loadedmetadata', () => {
-  videoReady = Number.isFinite(video.duration) && video.duration > 0;
-  targetVideoTime = video.currentTime;
-  video.pause();
-});
-video.addEventListener('seeked', () => {
-  seekQueued = false;
-  if (Math.abs(video.currentTime - targetVideoTime) > .02) requestVideoSeek();
-});
-video.addEventListener('error', () => { videoReady = false; });
-
-window.addEventListener('mousemove', (event) => {
-  const halfWidth = Math.max(window.innerWidth / 2, 1);
-  const halfHeight = Math.max(window.innerHeight / 2, 1);
-  targetX = (event.clientX - halfWidth) / halfWidth;
-  targetY = (event.clientY - halfHeight) / halfHeight;
-  if (prevMouseX !== null && videoReady && Number.isFinite(video.duration) && video.duration > 0) {
-    const delta = event.clientX - prevMouseX;
-    const relativeDelta = delta / Math.max(window.innerWidth, 1);
-    targetVideoTime = clamp(targetVideoTime + relativeDelta * VIDEO_SEEK_SENSITIVITY * video.duration, 0, video.duration);
-    requestVideoSeek();
+  function entry(title, time, role, stack, desc, items) {
+    var h = '<section class="m-entry"><div class="m-entry-title"><h3>' + title + "</h3>";
+    if (time) h += '<span class="m-time">' + time + "</span>";
+    if (role) h += '<span class="m-role">' + role + "</span>";
+    h += "</div>";
+    if (stack) h += '<p class="m-stack"><b>技术栈：</b>' + stack + "</p>";
+    if (desc) h += '<p class="m-desc">' + desc + "</p>";
+    if (items && items.length) h += '<ul class="m-list">' + items.map(function (i) { return "<li>" + i + "</li>"; }).join("") + "</ul>";
+    return h + "</section>";
   }
-  prevMouseX = event.clientX;
-});
 
-window.addEventListener('mouseleave', () => {
-  prevMouseX = null;
-});
-animatePointer();
+  function repo(name, desc, stack) {
+    var h = '<section class="m-entry"><div class="m-entry-title"><h3>' + name + "</h3></div>";
+    h += '<p class="m-desc">' + desc + "</p>";
+    h += '<p class="m-stack"><b>技术栈：</b>' + stack + "</p>";
+    return h + "</section>";
+  }
+
+  /* ================= 工具 ================= */
+  function $(sel) { return document.querySelector(sel); }
+
+  /* ================= 开场视频 ================= */
+  var intro = $("#intro");
+  var video = $("#intro-video");
+  var fallback = $("#intro-fallback");
+  var introDone = false;
+
+  function showStage() {
+    if (introDone) return;
+    introDone = true;
+    intro.classList.add("is-hidden");
+    try { video.pause(); } catch (e) {}
+  }
+
+  video.addEventListener("ended", showStage);
+  video.addEventListener("error", function () {
+    // 视频加载失败 → 显示静态封面
+    video.style.display = "none";
+    fallback.hidden = false;
+    setTimeout(showStage, 1500);
+  }, true);
+
+  video.addEventListener("canplay", function () {
+    var p = video.play();
+    if (p && p.catch) p.catch(showStage);
+  }, { once: true });
+
+  $("#intro-skip").addEventListener("click", showStage);
+
+  /* ================= 票券悬停放大 ================= */
+  var tickets = {};
+  document.querySelectorAll(".ticket").forEach(function (img) {
+    tickets[img.dataset.ticket] = img;
+  });
+
+  function lift(key, on) {
+    var t = tickets[key];
+    if (t) t.classList.toggle("is-up", !!on);
+  }
+
+  document.querySelectorAll(".hotspot").forEach(function (spot) {
+    var key = spot.dataset.ticket;
+    spot.addEventListener("mouseenter", function () { lift(key, true); });
+    spot.addEventListener("mouseleave", function () { lift(key, false); });
+    spot.addEventListener("focus", function () { lift(key, true); });
+    spot.addEventListener("blur", function () { lift(key, false); });
+    spot.addEventListener("click", function () { openModal(key); });
+  });
+
+  /* ================= 弹窗 ================= */
+  var modal = $("#modal");
+  var modalBody = $("#modal-body");
+  var lastFocus = null;
+
+  function openModal(key) {
+    var d = DATA[key];
+    if (!d) return;
+    $("#modal-no").textContent = d.no;
+    $("#modal-en").textContent = d.en;
+    $("#modal-title").textContent = d.title;
+    modalBody.innerHTML = d.html;
+    modalBody.scrollTop = 0;
+    lastFocus = document.activeElement;
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    $("#modal-close").focus();
+  }
+
+  function closeModal() {
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  modal.addEventListener("click", function (e) {
+    if (e.target.closest("[data-close]") || e.target === modal) closeModal();
+  });
+  $("#modal-close").addEventListener("click", closeModal);
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
+  });
+
+  // 手机端栏目入口：点击时先放大对应票券再打开弹窗
+  document.querySelectorAll(".mobile-nav button").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var key = btn.dataset.ticket;
+      lift(key, true);
+      setTimeout(function () { lift(key, false); }, 420);
+      openModal(key);
+    });
+  });
+
+  // 跟随系统「减少动态」设置
+  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    document.documentElement.classList.add("reduce-motion");
+  }
+})();
