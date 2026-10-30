@@ -60,26 +60,19 @@ img { user-select: none; }
 }
 .cover { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
 
-/* 票券透明层：悬停时以票券自身为中心放大 */
+/* 票券透明层：悬停或聚焦时显示对应票券图层，不做中心点缩放 */
 .ticket {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
   object-fit: contain;
   opacity: 0;
-  transform: scale(1);
-  transition: opacity 0.16s ease, transform 0.24s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: transform, opacity;
+  transition: opacity 0.16s ease;
+  will-change: opacity;
   pointer-events: none;
 }
 .ticket.is-up {
   opacity: 1;
-  transform: scale(1.07);
-  filter: drop-shadow(0 14px 22px rgba(17, 17, 17, 0.22));
 }
-.t-01 { transform-origin: 13.76% 32.13%; }
-.t-02 { transform-origin: 37.44% 18.45%; }
-.t-03 { transform-origin: 62.56% 18.94%; }
-.t-04 { transform-origin: 86.01% 32.34%; }
 
 /* 四张票券热区（百分比按设计图实测包围盒） */
 .hotspot { position: absolute; background: transparent; border-radius: 10px; }

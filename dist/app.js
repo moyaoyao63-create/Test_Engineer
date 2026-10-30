@@ -142,23 +142,23 @@
 
   $("#intro-skip").addEventListener("click", showStage);
 
-  /* ================= 票券悬停放大 ================= */
+  /* ================= 票券悬停显示 ================= */
   var tickets = {};
   document.querySelectorAll(".ticket").forEach(function (img) {
     tickets[img.dataset.ticket] = img;
   });
 
-  function lift(key, on) {
+  function showTicket(key, on) {
     var t = tickets[key];
     if (t) t.classList.toggle("is-up", !!on);
   }
 
   document.querySelectorAll(".hotspot").forEach(function (spot) {
     var key = spot.dataset.ticket;
-    spot.addEventListener("mouseenter", function () { lift(key, true); });
-    spot.addEventListener("mouseleave", function () { lift(key, false); });
-    spot.addEventListener("focus", function () { lift(key, true); });
-    spot.addEventListener("blur", function () { lift(key, false); });
+    spot.addEventListener("mouseenter", function () { showTicket(key, true); });
+    spot.addEventListener("mouseleave", function () { showTicket(key, false); });
+    spot.addEventListener("focus", function () { showTicket(key, true); });
+    spot.addEventListener("blur", function () { showTicket(key, false); });
     spot.addEventListener("click", function () { openModal(key); });
   });
 
@@ -195,12 +195,12 @@
     if (e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
   });
 
-  // 手机端栏目入口：点击时先放大对应票券再打开弹窗
+  // 手机端栏目入口：点击时先显示对应票券再打开弹窗
   document.querySelectorAll(".mobile-nav button").forEach(function (btn) {
     btn.addEventListener("click", function () {
       var key = btn.dataset.ticket;
-      lift(key, true);
-      setTimeout(function () { lift(key, false); }, 420);
+      showTicket(key, true);
+      setTimeout(function () { showTicket(key, false); }, 420);
       openModal(key);
     });
   });
