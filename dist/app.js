@@ -61,7 +61,8 @@
       no: "03", en: "OPEN SOURCE", title: "GitHub 项目",
       // 简历中暂未提供仓库地址；拿到真实链接后填入下方 url 即可渲染为可点击链接。
       html:
-        '<p class="m-note">以下项目均已完成开发实践，仓库链接整理中，随后补充。</p>' +
+        '<p class="m-note">以下为简历中的项目及已提供的仓库链接。</p>' +
+        repo("个人简历网站", "个人简历网站项目。", "", "https://github.com/moyaoyao63-create/Website_out.git") +
         repo("需求数据清洗与结构化处理系统",
           "基于 Dify 的自动化数据处理工作流：多格式需求文件解析、数据清洗、LLM 信息抽取与 XLSX 自动化导出。",
           "Python · Dify Workflow · LLM · Prompt Engineering") +
@@ -107,7 +108,7 @@
   function repo(name, desc, stack, url) {
     var h = '<section class="m-entry"><div class="m-entry-title"><h3>' + name + "</h3></div>";
     h += '<p class="m-desc">' + desc + "</p>";
-    h += '<p class="m-stack"><b>技术栈：</b>' + stack + "</p>";
+    if (stack) h += '<p class="m-stack"><b>技术栈：</b>' + stack + "</p>";
     if (url) {
       h += '<a class="entry-action" href="' + url + '" target="_blank" rel="noreferrer">查看仓库 ↗</a>';
     } else {
