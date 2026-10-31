@@ -128,12 +128,27 @@
 
   video.muted = true;
   video.defaultMuted = true;
+  video.volume = 0;
+  video.setAttribute("muted", "");
+  video.setAttribute("autoplay", "");
+  video.setAttribute("playsinline", "");
+  video.autoplay = true;
 
   function playIntro() {
     if (introDone) return;
     video.muted = true;
+    video.defaultMuted = true;
+    video.volume = 0;
     var promise = video.play();
-    if (promise && promise.catch) promise.catch(showStage);
+    if (promise && promise.catch) {
+      promise.catch(function () {
+        // 某些本地文件环境会在第一次调用时拒绝自动播放；保持开场层可见，稍后重试。
+      });
+    }
+  }
+
+  function startIntroWhenReady() {
+    if (!introDone) playIntro();
   }
 
   function showStage() {
@@ -152,9 +167,16 @@
     fallbackTimer = window.setTimeout(showStage, 1000);
   }, true);
 
-  video.addEventListener("canplay", function () {
-    playIntro();
+  video.addEventListener("loadedmetadata", startIntroWhenReady);
+  video.addEventListener("loadeddata", startIntroWhenReady);
+  video.addEventListener("canplay", startIntroWhenReady);
+  video.addEventListener("canplaythrough", startIntroWhenReady);
+  document.addEventListener("visibilitychange", function () {
+    if (!document.hidden) startIntroWhenReady();
   });
+  document.addEventListener("pointerdown", startIntroWhenReady, { passive: true });
+  document.addEventListener("keydown", startIntroWhenReady);
+  window.setTimeout(startIntroWhenReady, 0);
 
   /* ================= 人物状态图切换 ================= */
   var stateImages = {};
