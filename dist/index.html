@@ -21,22 +21,13 @@
         preload="auto"
         poster="./assets/封面.png"
       >
-        <source src="./assets/人物打招呼视频.mp4" type="video/mp4" />
+        <source src="./assets/去除水印.mp4" type="video/mp4" />
       </video>
       <img class="intro-fallback" id="intro-fallback" src="./assets/封面.png" alt="" hidden />
-      <div class="intro-actions">
-        <span class="intro-note">静音播放</span>
-        <button class="ctrl" id="intro-skip" type="button">跳过开场 →</button>
-      </div>
     </section>
 
     <!-- 主画面：封面 + 四张人物状态图热区 -->
     <main class="stage" id="stage" aria-label="个人简历主画面">
-      <div class="site-tools" aria-label="网站操作">
-        <button class="ctrl ctrl-small" id="replay-intro" type="button">重播开场</button>
-        <button class="ctrl ctrl-small" id="share-site" type="button">分享链接</button>
-        <button class="ctrl ctrl-small" id="reduce-motion-toggle" type="button" aria-pressed="false">减少动态</button>
-      </div>
       <div class="scene" id="scene">
         <img class="cover" src="./assets/封面.png" alt="Moyao 个人简历主画面：四张票券分别是项目经历、工作经历、GitHub 项目、技能工具" draggable="false" />
 
@@ -76,8 +67,6 @@
         </footer>
       </article>
     </div>
-
-    <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
     <script src="./app.js"></script>
   </body>

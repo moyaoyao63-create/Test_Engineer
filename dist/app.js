@@ -144,21 +144,6 @@
     try { video.pause(); } catch (e) {}
   }
 
-  function replayIntro() {
-    introDone = false;
-    if (fallbackTimer) window.clearTimeout(fallbackTimer);
-    intro.classList.remove("is-hidden");
-    fallback.hidden = true;
-    video.style.display = "block";
-    video.muted = true;
-    try {
-      video.pause();
-      video.currentTime = 0;
-      video.load();
-    } catch (e) {}
-    if (video.readyState >= 2) playIntro();
-  }
-
   video.addEventListener("ended", showStage);
   video.addEventListener("error", function () {
     // 视频加载失败 → 显示静态封面
@@ -170,9 +155,6 @@
   video.addEventListener("canplay", function () {
     playIntro();
   });
-
-  $("#intro-skip").addEventListener("click", showStage);
-  $("#replay-intro").addEventListener("click", replayIntro);
 
   /* ================= 人物状态图切换 ================= */
   var stateImages = {};
@@ -243,89 +225,12 @@
     if (e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
   });
 
-  /* ================= 重播 / 分享 / 减少动态 ================= */
-  var toast = $("#toast");
-  var toastTimer = null;
-
-  function showToast(message) {
-    toast.textContent = message;
-    toast.classList.add("is-show");
-    if (toastTimer) window.clearTimeout(toastTimer);
-    toastTimer = window.setTimeout(function () { toast.classList.remove("is-show"); }, 2200);
-  }
-
-  function fallbackCopy(text) {
-    var field = document.createElement("textarea");
-    field.value = text;
-    field.setAttribute("readonly", "");
-    field.style.position = "fixed";
-    field.style.opacity = "0";
-    document.body.appendChild(field);
-    field.select();
-    var copied = false;
-    try { copied = document.execCommand("copy"); } catch (e) {}
-    document.body.removeChild(field);
-    if (copied) {
-      showToast("网站链接已复制");
-    } else if (window.prompt) {
-      window.prompt("请复制网站链接", text);
-    } else {
-      showToast("请手动复制当前网址");
-    }
-  }
-
-  function shareSite() {
-    var url = window.location.href;
-    var shareData = { title: document.title, text: "Moyao / PORTFOLIO", url: url };
-    if (navigator.share) {
-      try {
-        var sharing = navigator.share(shareData);
-        if (sharing && sharing.then) {
-          sharing.then(function () { showToast("分享面板已打开"); }).catch(function (error) {
-            if (!error || error.name !== "AbortError") fallbackCopy(url);
-          });
-        }
-      } catch (error) {
-        fallbackCopy(url);
-      }
-      return;
-    }
-    if (navigator.clipboard && window.isSecureContext) {
-      navigator.clipboard.writeText(url).then(function () {
-        showToast("网站链接已复制");
-      }).catch(function () { fallbackCopy(url); });
-      return;
-    }
-    fallbackCopy(url);
-  }
-
-  $("#share-site").addEventListener("click", shareSite);
-
-  var reduceButton = $("#reduce-motion-toggle");
-  var reduceStorageKey = "moyao-reduce-motion";
-  var storedReduceMotion = null;
-  try { storedReduceMotion = window.localStorage.getItem(reduceStorageKey); } catch (e) {}
+  /* ================= 系统减少动态 ================= */
   var motionQuery = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
-
-  function applyReduceMotion(enabled) {
-    document.documentElement.classList.toggle("reduce-motion", enabled);
-    reduceButton.setAttribute("aria-pressed", String(enabled));
-    reduceButton.textContent = enabled ? "恢复动态" : "减少动态";
-    if (enabled && !introDone) showStage();
-  }
-
-  var initialReduceMotion = storedReduceMotion === "1" || (storedReduceMotion === null && motionQuery && motionQuery.matches);
-  applyReduceMotion(!!initialReduceMotion);
-  reduceButton.addEventListener("click", function () {
-    var enabled = !document.documentElement.classList.contains("reduce-motion");
-    try { window.localStorage.setItem(reduceStorageKey, enabled ? "1" : "0"); } catch (e) {}
-    storedReduceMotion = enabled ? "1" : "0";
-    applyReduceMotion(enabled);
-    showToast(enabled ? "已减少动态效果" : "已恢复动态效果");
-  });
+  if (motionQuery && motionQuery.matches) showStage();
   if (motionQuery && motionQuery.addEventListener) {
     motionQuery.addEventListener("change", function (event) {
-      if (storedReduceMotion === null) applyReduceMotion(event.matches);
+      if (event.matches) showStage();
     });
   }
 
