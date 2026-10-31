@@ -32,6 +32,7 @@ img { user-select: none; }
 }
 .ctrl:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 rgba(17, 17, 17, 0.85); }
 .ctrl:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 rgba(17, 17, 17, 0.85); }
+.ctrl-small { padding: 6px 10px; font-size: 11px; }
 
 /* ============ 开场视频 ============ */
 .intro {
@@ -46,11 +47,24 @@ img { user-select: none; }
   position: absolute; left: 0; right: 0; bottom: max(22px, env(safe-area-inset-bottom));
   display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
 }
+.intro-note {
+  display: inline-flex; align-items: center;
+  padding: 8px 12px;
+  border: 1.5px solid rgba(17, 17, 17, 0.42);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.78);
+  font-size: 12px;
+  font-weight: 700;
+}
 
 /* ============ 主画面 ============ */
 .stage {
   position: fixed; inset: 0;
   display: flex; align-items: center; justify-content: center;
+}
+.site-tools {
+  position: fixed; top: max(14px, env(safe-area-inset-top)); right: 14px; z-index: 45;
+  display: flex; gap: 7px; flex-wrap: wrap; justify-content: flex-end;
 }
 .scene {
   position: relative;
@@ -58,19 +72,18 @@ img { user-select: none; }
   aspect-ratio: 1672 / 941;
   max-height: 100vh;
 }
-.cover { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
-
-/* 票券透明层：悬停或聚焦时显示对应票券图层，不做中心点缩放 */
-.ticket {
+.cover, .state-image {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
   object-fit: contain;
+}
+.state-image {
   opacity: 0;
   transition: opacity 0.16s ease;
   will-change: opacity;
   pointer-events: none;
 }
-.ticket.is-up {
+.state-image.is-active {
   opacity: 1;
 }
 
@@ -133,6 +146,16 @@ img { user-select: none; }
 }
 .modal-foot a { color: var(--ink); font-weight: 700; font-size: 13px; text-decoration: none; }
 .modal-foot a:hover { color: var(--red); }
+.entry-action {
+  display: inline-block;
+  margin-top: 8px;
+  color: var(--red);
+  font-size: 13px;
+  font-weight: 900;
+  text-decoration: none;
+}
+.entry-action:hover { text-decoration: underline; }
+.entry-action-disabled { color: #99937f; font-weight: 700; }
 .modal-barcode {
   width: 92px; height: 22px;
   background: repeating-linear-gradient(90deg,
@@ -180,6 +203,8 @@ img { user-select: none; }
   .stage { padding-bottom: calc(76px + env(safe-area-inset-bottom)); }
   .scene { width: 100vw; max-height: none; }
   .ctrl { padding: 6px 12px; font-size: 12px; }
+  .site-tools { top: max(8px, env(safe-area-inset-top)); right: 8px; gap: 4px; }
+  .ctrl-small { padding: 5px 7px; font-size: 10px; }
   .mobile-nav {
     position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
     display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;

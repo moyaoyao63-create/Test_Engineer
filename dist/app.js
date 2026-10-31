@@ -104,10 +104,15 @@
     return h + "</section>";
   }
 
-  function repo(name, desc, stack) {
+  function repo(name, desc, stack, url) {
     var h = '<section class="m-entry"><div class="m-entry-title"><h3>' + name + "</h3></div>";
     h += '<p class="m-desc">' + desc + "</p>";
     h += '<p class="m-stack"><b>技术栈：</b>' + stack + "</p>";
+    if (url) {
+      h += '<a class="entry-action" href="' + url + '" target="_blank" rel="noreferrer">查看仓库 ↗</a>';
+    } else {
+      h += '<span class="entry-action entry-action-disabled">简历未提供仓库地址</span>';
+    }
     return h + "</section>";
   }
 
@@ -119,12 +124,39 @@
   var video = $("#intro-video");
   var fallback = $("#intro-fallback");
   var introDone = false;
+  var fallbackTimer = null;
+
+  video.muted = true;
+  video.defaultMuted = true;
+
+  function playIntro() {
+    if (introDone) return;
+    video.muted = true;
+    var promise = video.play();
+    if (promise && promise.catch) promise.catch(showStage);
+  }
 
   function showStage() {
     if (introDone) return;
     introDone = true;
+    if (fallbackTimer) window.clearTimeout(fallbackTimer);
     intro.classList.add("is-hidden");
     try { video.pause(); } catch (e) {}
+  }
+
+  function replayIntro() {
+    introDone = false;
+    if (fallbackTimer) window.clearTimeout(fallbackTimer);
+    intro.classList.remove("is-hidden");
+    fallback.hidden = true;
+    video.style.display = "block";
+    video.muted = true;
+    try {
+      video.pause();
+      video.currentTime = 0;
+      video.load();
+    } catch (e) {}
+    if (video.readyState >= 2) playIntro();
   }
 
   video.addEventListener("ended", showStage);
@@ -132,33 +164,49 @@
     // 视频加载失败 → 显示静态封面
     video.style.display = "none";
     fallback.hidden = false;
-    setTimeout(showStage, 1500);
+    fallbackTimer = window.setTimeout(showStage, 1000);
   }, true);
 
   video.addEventListener("canplay", function () {
-    var p = video.play();
-    if (p && p.catch) p.catch(showStage);
-  }, { once: true });
-
-  $("#intro-skip").addEventListener("click", showStage);
-
-  /* ================= 票券悬停显示 ================= */
-  var tickets = {};
-  document.querySelectorAll(".ticket").forEach(function (img) {
-    tickets[img.dataset.ticket] = img;
+    playIntro();
   });
 
-  function showTicket(key, on) {
-    var t = tickets[key];
-    if (t) t.classList.toggle("is-up", !!on);
+  $("#intro-skip").addEventListener("click", showStage);
+  $("#replay-intro").addEventListener("click", replayIntro);
+
+  /* ================= 人物状态图切换 ================= */
+  var stateImages = {};
+  var hoverKey = null;
+  var focusKey = null;
+
+  document.querySelectorAll("[data-state-image]").forEach(function (img) {
+    stateImages[img.dataset.stateImage] = img;
+    img.addEventListener("error", function () {
+      img.hidden = true;
+      syncState();
+    });
+  });
+
+  function syncState() {
+    var activeKey = focusKey || hoverKey;
+    Object.keys(stateImages).forEach(function (key) {
+      var image = stateImages[key];
+      image.classList.toggle("is-active", key === activeKey && !image.hidden);
+    });
+  }
+
+  function setState(key, mode, on) {
+    if (mode === "hover") hoverKey = on ? key : (hoverKey === key ? null : hoverKey);
+    if (mode === "focus") focusKey = on ? key : (focusKey === key ? null : focusKey);
+    syncState();
   }
 
   document.querySelectorAll(".hotspot").forEach(function (spot) {
     var key = spot.dataset.ticket;
-    spot.addEventListener("mouseenter", function () { showTicket(key, true); });
-    spot.addEventListener("mouseleave", function () { showTicket(key, false); });
-    spot.addEventListener("focus", function () { showTicket(key, true); });
-    spot.addEventListener("blur", function () { showTicket(key, false); });
+    spot.addEventListener("mouseenter", function () { setState(key, "hover", true); });
+    spot.addEventListener("mouseleave", function () { setState(key, "hover", false); });
+    spot.addEventListener("focus", function () { setState(key, "focus", true); });
+    spot.addEventListener("blur", function () { setState(key, "focus", false); });
     spot.addEventListener("click", function () { openModal(key); });
   });
 
@@ -195,18 +243,99 @@
     if (e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
   });
 
-  // 手机端栏目入口：点击时先显示对应票券再打开弹窗
+  /* ================= 重播 / 分享 / 减少动态 ================= */
+  var toast = $("#toast");
+  var toastTimer = null;
+
+  function showToast(message) {
+    toast.textContent = message;
+    toast.classList.add("is-show");
+    if (toastTimer) window.clearTimeout(toastTimer);
+    toastTimer = window.setTimeout(function () { toast.classList.remove("is-show"); }, 2200);
+  }
+
+  function fallbackCopy(text) {
+    var field = document.createElement("textarea");
+    field.value = text;
+    field.setAttribute("readonly", "");
+    field.style.position = "fixed";
+    field.style.opacity = "0";
+    document.body.appendChild(field);
+    field.select();
+    var copied = false;
+    try { copied = document.execCommand("copy"); } catch (e) {}
+    document.body.removeChild(field);
+    if (copied) {
+      showToast("网站链接已复制");
+    } else if (window.prompt) {
+      window.prompt("请复制网站链接", text);
+    } else {
+      showToast("请手动复制当前网址");
+    }
+  }
+
+  function shareSite() {
+    var url = window.location.href;
+    var shareData = { title: document.title, text: "Moyao / PORTFOLIO", url: url };
+    if (navigator.share) {
+      try {
+        var sharing = navigator.share(shareData);
+        if (sharing && sharing.then) {
+          sharing.then(function () { showToast("分享面板已打开"); }).catch(function (error) {
+            if (!error || error.name !== "AbortError") fallbackCopy(url);
+          });
+        }
+      } catch (error) {
+        fallbackCopy(url);
+      }
+      return;
+    }
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(url).then(function () {
+        showToast("网站链接已复制");
+      }).catch(function () { fallbackCopy(url); });
+      return;
+    }
+    fallbackCopy(url);
+  }
+
+  $("#share-site").addEventListener("click", shareSite);
+
+  var reduceButton = $("#reduce-motion-toggle");
+  var reduceStorageKey = "moyao-reduce-motion";
+  var storedReduceMotion = null;
+  try { storedReduceMotion = window.localStorage.getItem(reduceStorageKey); } catch (e) {}
+  var motionQuery = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
+
+  function applyReduceMotion(enabled) {
+    document.documentElement.classList.toggle("reduce-motion", enabled);
+    reduceButton.setAttribute("aria-pressed", String(enabled));
+    reduceButton.textContent = enabled ? "恢复动态" : "减少动态";
+    if (enabled && !introDone) showStage();
+  }
+
+  var initialReduceMotion = storedReduceMotion === "1" || (storedReduceMotion === null && motionQuery && motionQuery.matches);
+  applyReduceMotion(!!initialReduceMotion);
+  reduceButton.addEventListener("click", function () {
+    var enabled = !document.documentElement.classList.contains("reduce-motion");
+    try { window.localStorage.setItem(reduceStorageKey, enabled ? "1" : "0"); } catch (e) {}
+    storedReduceMotion = enabled ? "1" : "0";
+    applyReduceMotion(enabled);
+    showToast(enabled ? "已减少动态效果" : "已恢复动态效果");
+  });
+  if (motionQuery && motionQuery.addEventListener) {
+    motionQuery.addEventListener("change", function (event) {
+      if (storedReduceMotion === null) applyReduceMotion(event.matches);
+    });
+  }
+
+  // 手机端栏目入口：点击时先显示对应人物状态图再打开弹窗
   document.querySelectorAll(".mobile-nav button").forEach(function (btn) {
     btn.addEventListener("click", function () {
       var key = btn.dataset.ticket;
-      showTicket(key, true);
-      setTimeout(function () { showTicket(key, false); }, 420);
+      setState(key, "focus", true);
+      setTimeout(function () { setState(key, "focus", false); }, 420);
       openModal(key);
     });
   });
-
-  // 跟随系统「减少动态」设置
-  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    document.documentElement.classList.add("reduce-motion");
-  }
 })();
