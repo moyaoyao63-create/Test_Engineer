@@ -1,4 +1,4 @@
-/* Moyao / PORTFOLIO —— 内容全部来自 dist/assets/简历.docx，未添加虚构信息 */
+/* 莫瑶 / PORTFOLIO —— 内容根据用户提供的简历-hlwai.docx 整理，未添加虚构信息 */
 (function () {
   "use strict";
 
@@ -7,27 +7,28 @@
     projects: {
       no: "01", en: "PROJECTS", title: "项目经历",
       html:
-        entry("需求数据清洗与结构化处理系统", "2025年12月 ~ 2026年3月", "测试开发工程师",
-          "Python / Dify Workflow / LLM / Prompt Engineering / JSON / API",
-          "针对业务需求文件格式不统一、人工提取需求信息耗时、测试数据整理成本高等问题，基于 Dify 搭建自动化数据处理工作流，实现多格式需求文件解析、数据清洗、结构化转换、AI 信息抽取、数据校验及 Excel 导出。",
+        entry("智能座舱测试（Android App 端）", "2025年10月 ~ 2026年3月", "测试工程师",
+          "Python · Flask · Pandas · Dify · USBCAN · ADB · Monkey",
+          "<b>项目描述：</b>面向工业车载终端 Android 座舱显示系统，负责整机软硬件联调及系统测试，覆盖应用层、Android 系统层、CAN 总线通信及底层 ECU / IO 模块。<br><b>测试类型：</b>功能测试 · UI 测试 · CAN 通信测试 · 性能测试 · 稳定性测试 · 回归测试。",
           [
-            "<b>Workflow 架构设计：</b>基于 Dify 设计多分支 AI 工作流，结合条件判断、文件解析、Python 代码执行、变量聚合及 LLM 节点，构建从需求文件接入到测试用例输出的自动化处理链路。",
-            "<b>多格式数据解析：</b>针对 Excel/CSV、文档及图片等输入类型设计差异化解析流程，通过数据清洗、字段结构转换及统一 JSON 输出，解决多源需求数据结构不一致的问题。",
-            "<b>需求数据清洗与标准化：</b>基于 Python 构建字段映射、空值过滤及去重规则，将原始内容转换为统一 JSON Schema，并通过异常记录筛选与规则校验提高数据可用性。",
-            "<b>LLM 信息抽取与结构化处理：</b>针对长文本需求设计内容分块、需求事实抽取与 JSON 解析流程，通过 Prompt 约束模型输出结构，并结合规则清洗、编号分组等节点组织需求数据。",
-            "<b>数据质量校验及需求覆盖检查：</b>对需求数据与生成的测试用例进行关联检查，整理覆盖结果及报告数据。",
-            "<b>自动化数据交付：</b>将处理结果汇总、编号并转换为 XLSX 文件，形成从原始需求输入到结构化数据输出的自动化处理链路。",
-            "<b>工作流服务集成：</b>通过 Dify Workflow API 对接外部测试平台，实现业务需求提交、工作流调用、结果获取及文件导出，推动 AI 能力在业务场景中落地。"
+            "<b>AI 辅助测试提效：</b>基于 Dify 搭建测试用例生成工作流，完成平台侧需求输入、工作流 API 调用封装，测试用例输出效率提升 70%。",
+            "<b>CAN 通信自动化测试工具开发：</b>基于 Python 开发 CAN 测试辅助工具链，包含需求文档解析与标准化转换、CAN 报文批量生成及硬件通信收发监控三个模块，CAN 通信测试效率提高 80%。",
+            "<b>问题复现与定位：</b>针对屏幕崩溃问题难以稳定复现的痛点，搭建自动化脚本仿真环境，将复现时间由 5 小时缩短至 30 分钟，协助开发定位问题根因并完成修复验证。",
+            "<b>测试质量保障：</b>累计设计并执行测试用例 600+ 条，发现并推动修复缺陷 160+ 个，保障多个版本测试交付质量。",
+            "<b>工作职责：</b>负责 Android 终端软件及软硬件集成测试，覆盖基本功能、UI、CAN 通信（使用 USBCAN 等工具验证）、性能、稳定性以及可靠性测试（包括高低温、盐雾等）。",
+            "<b>异常场景测试：</b>针对音乐播放中来电、OTA 升级中断电、低功耗切换、断电及唤醒恢复等场景开展异常注入测试，验证系统在多任务并发及异常状态切换下的恢复能力。",
+            "<b>稳定性测试：</b>使用 Monkey 构建高频事件注入脚本，结合高负载 CAN 数据运行，监控 Crash、ANR、内存异常等问题，并结合 ADB 日志进行分析定位。",
+            "<b>测试经验沉淀：</b>全程跟进版本质量，结合多版本测试实践，总结测试用例设计方法及常见问题场景，输出测试经验文档并开展内部分享，推动团队测试标准及用例设计规范化。"
           ]) +
-        entry("自动化测试平台", "2025年4月 ~ 2025年9月", "测试开发工程师",
-          "React / FastAPI / Python / RESTful API / Docker / Nginx",
-          "针对测试过程中工具分散、数据转换依赖人工操作及测试执行流程繁琐等问题，基于 React + FastAPI 独立设计并开发前后端分离的自动化测试平台。集成 AI 用例生成、CAN 协议转换、CAN 数据模拟发送及自定义数据构造等功能，实现测试工具的统一管理与操作。",
+        entry("物联网平台（Web 端）", "2025年4月 ~ 2025年9月", "测试工程师",
+          "Python · Requests · Pytest · Allure · Postman · JMeter · SQL",
+          "<b>项目描述：</b>面向清扫车、叉车、牵引车等工程车辆的物联网运营管理平台，覆盖车辆类型、设备管理、远程锁机、实时定位、历史轨迹、地理围栏、视频监控、告警中心、通知中心、OTA 升级等功能，实现设备状态监测、指令下发、异常告警和运维闭环。<br><b>测试类型：</b>功能测试 · 接口测试 · 数据库测试 · 性能测试 · 接口自动化测试 · 异常场景测试。",
           [
-            "<b>前后端架构设计与开发：</b>基于 React Hooks 构建模块化单页应用，使用 FastAPI 设计 RESTful API，完成文件上传、参数配置、任务提交、状态轮询、结果预览及文件下载等功能。",
-            "<b>后端接口开发与服务集成：</b>使用 Python + FastAPI 封装业务处理接口，基于 Pydantic 实现请求参数校验，使用 httpx 对接外部 AI 服务，实现 API 请求转发、结果解析及数据返回，并通过环境变量管理 API Key。",
-            "<b>CAN 数据清洗与转换模块开发：</b>基于 Python 开发 CAN 数据处理模块，对非标准 Excel 原始数据进行解析、字段映射、格式清洗及结构化转换，依据 CAN 协议规则完成数据校验与异常识别，自动生成标准 DBC 文件。",
-            "<b>CAN 硬件通信开发：</b>通过 Python ctypes 调用 USBCAN2 厂商 DLL，实现设备双通道初始化、CAN 报文发送及后台线程任务管理，支持任务进度查询与执行中止。",
-            "<b>容器化部署与服务管理：</b>使用 Docker Compose 完成前后端服务容器化部署，配置 Nginx 静态资源服务及 API 反向代理，实现前后端服务的统一访问。"
+            "<b>业务模块测试：</b>负责车辆类型管理、设备管理、告警规则功能模块测试，根据业务流程设计并执行功能、接口、数据库及异常场景测试用例 300+ 条，覆盖车辆类型管理、设备管理、告警规则等核心业务流程。",
+            "<b>接口与数据校验：</b>使用 Postman 完成车辆类型、设备管理、告警规则等模块的接口测试，验证接口参数校验、业务逻辑及异常处理；编写 SQL 语句对关键数据进行校验，验证前后端及数据库数据的一致性。",
+            "<b>性能测试：</b>使用 JMeter 完成关键接口性能测试，通过配置线程组、参数化及断言等方式模拟并发请求，验证接口在并发场景下的响应及稳定性表现。",
+            "<b>接口自动化：</b>基于 Python + Requests + Pytest 搭建接口自动化测试框架，完成 30+ 个核心业务接口自动化脚本编写，提升回归测试效率约 60%，支撑多个版本稳定上线。",
+            "<b>测试报告：</b>集成 Allure 生成可视化测试报告，支持测试结果统计、失败用例定位及历史结果查看。"
           ])
     },
 
@@ -36,39 +37,33 @@
       html:
         '<div class="m-info">' +
           '<div><b>年龄 / 经验</b>24 岁 · 工作年限 2 年</div>' +
+          '<div><b>求职意向</b>测试工程师</div>' +
           '<div><b>毕业院校</b>湖南财政经济学院（一本）</div>' +
           '<div><b>学历 / 专业</b>全日制本科 · 计算机科学与技术</div>' +
-          '<div><b>求职意向</b>AI数据交付 / AI训练师</div>' +
         "</div>" +
-        entry("湖南省鼎立电气科技有限公司", "2024年6月 ~ 2026年4月", "测试开发工程师", "", "",
+        entry("湖南省鼎立电气科技有限公司", "2024年3月 ~ 2026年4月", "测试工程师", "", "",
           [
-            "<b>AI 数据处理与工具建设：</b>参与 AI 测试提效工具开发，基于 Dify 搭建 AI 用例生成 Workflow，完成需求数据输入、API 调用封装、结果处理及结构化输出，推动 AI 能力在实际业务流程中落地。",
-            "<b>数据构造与自动化处理：</b>针对 CAN 协议测试中数据构造及报文配置效率低的问题，使用 Python 开发自动化数据处理工具，实现需求文档数据点向标准 CAN 报文结构及 DBC 文件的自动转换，并支持数据自动发送，测试准备及执行效率提升约 30%。",
-            "<b>数据质量与标准化：</b>梳理历史质量问题及高频异常场景，建立历史缺陷库和专项 CheckList，将质量检查规则进行标准化，推动问题前置发现及流程规范化，同类缺陷重复发生率降低 30%。",
-            "<b>数据校验与自动化：</b>使用 SQL 对业务数据库进行数据查询及一致性校验，并基于 Python + Requests + Pytest 开发接口自动化脚本，实现测试数据处理、接口验证及结果统计。",
-            "<b>质量保障与问题闭环：</b>负责车载终端及物联网平台相关数据和业务流程验证，结合日志、数据库及接口数据进行问题定位，推动异常问题闭环处理。"
+            "<b>车载终端质量保障：</b>独立负责 Android 车载显示终端全生命周期质量保障，支撑多个战略级客户项目成功交付。",
+            "<b>AI 测试提效与工具建设：</b>参与 AI 测试提效工具开发与平台化建设，完成 AI 用例生成工作流和 API 调用封装，并根据需求开发 CAN 协议转换、CAN 数据构造及自动化发送等 Python 脚本。",
+            "<b>质量保障前移：</b>主动梳理历史质量痛点，构建历史缺陷库与专项自测 CheckList，推动质量保障前移（测试左移），赋能研发人员在编码阶段开展精准自测，同类缺陷重复发生率降低 30%。"
           ]) +
+        entry("教育经历", "", "", "", "<b>院校：</b>湖南财政经济学院（一本）<br><b>专业：</b>软件学院 · 计算机科学与技术 · 全日制本科<br><b>时间 / 地点：</b>2022年9月 ~ 2024年6月 · 长沙<br><b>成绩：</b>绩点 3.97 / 4.0 · 省级优秀毕业生", []) +
+        entry("奖项证书", "", "", "", "", [
+          "英语六级 564 分（CET-6） · 软考中级 · 计算机二级 · C1 驾驶证",
+          "省级优秀毕业生 · 校级优秀毕业生 · 国家励志奖学金（两次） · 创新创业大赛省级奖项"
+        ]) +
         entry("自我评价", "", "", "", "",
           [
-            "具备强烈的自动化与提效意识，擅长利用 AI 工具赋能工作流程，提升数据构造及 Python 脚本开发效率。",
-            "具备扎实的数学基础和逻辑思维能力，擅长从多角度分析软件系统潜在问题，确保测试工作的全面性和准确性。",
-            "具备较强的反思总结与持续学习能力，善于团队合作沟通，情绪稳定，抗压能力强，热情积极。",
-            "具备出色的问题定位与溯源能力，善于结合日志分析与环境仿真攻坚极难复现 Bug；坚持闭环思维，推动缺陷高效修复。"
+            "具备良好的沟通表达能力和团队协作意识，能够主动与团队成员沟通协作，及时反馈并推动问题解决。",
+            "学习能力较强，善于主动学习新技术、新工具，并能够结合实际工作快速掌握，具备较强的自我驱动力。",
+            "工作认真负责，责任心强，具有良好的抗压能力，能够合理安排工作优先级，按时完成工作目标。",
+            "具备较强的问题分析和总结能力，善于复盘工作中的问题，主动总结经验并优化工作方法。"
           ])
     },
 
     github: {
       no: "03", en: "OPEN SOURCE", title: "GitHub 项目",
-      // 简历中暂未提供仓库地址；拿到真实链接后填入下方 url 即可渲染为可点击链接。
-      html:
-        '<p class="m-note">以下为简历中的项目及已提供的仓库链接。</p>' +
-        repo("个人简历网站", "个人简历网站项目。", "", "https://github.com/moyaoyao63-create/Website_out.git") +
-        repo("需求数据清洗与结构化处理系统",
-          "基于 Dify 的自动化数据处理工作流：多格式需求文件解析、数据清洗、LLM 信息抽取与 XLSX 自动化导出。",
-          "Python · Dify Workflow · LLM · Prompt Engineering") +
-        repo("自动化测试平台",
-          "React + FastAPI 前后端分离的一站式测试工具平台：AI 用例生成、CAN 协议转换、CAN 数据模拟发送与自定义数据构造。",
-          "React · FastAPI · Python · Docker · Nginx")
+      html: '<p class="m-note">简历中未提供 GitHub 项目或仓库地址。</p>'
     },
 
     skills: {
@@ -76,20 +71,19 @@
       html:
         entry("专业技能", "", "", "", "",
           [
-            "<b>Python 数据处理：</b>使用 Python 编写数据处理及自动化脚本，完成数据解析、转换、构造、批量处理及结果输出。",
-            "<b>数据质量与校验：</b>熟悉数据完整性、准确性、一致性等质量校验思路，能够通过 Python、SQL 对业务数据进行校验、异常识别及结果统计。",
-            "<b>SQL / 数据库：</b>熟悉 MySQL，能够使用 SQL 完成数据查询、条件筛选、聚合统计及多表关联，并进行业务数据一致性校验。",
-            "<b>AI 数据处理：</b>具备 AI skill 测试及 Workflow 实践经验，基于 Dify 搭建测试用例生成工作流，完成需求数据输入、API 调用封装、结果处理及 Markdown 数据导出。",
-            "<b>数据自动化：</b>曾使用 Python 将需求文档中的数据点自动转换为标准 CAN 报文结构及 DBC 文件，并实现自动化发送。",
-            "<b>数据质量标准化：</b>具备质量规则梳理、CheckList 建设及流程标准化经验，能够通过规范化规则提升数据及项目执行的一致性。",
-            "<b>工具与协作：</b>熟悉 Git、Linux 常用操作，具备跨团队协作及问题定位能力。",
-            "<b>软件测试基础：</b>熟悉软件测试流程、缺陷生命周期及常见测试设计方法，具备接口、数据库、自动化测试实践经验。",
-            "<b>AI 工具应用能力：</b>熟悉 ChatGPT、Codex 等主流 AI 工具，具备 AI 辅助编程与工程实践经验，能够运用 AI 完成需求分析、技术方案设计、代码生成、问题排查及代码优化。"
+            "<b>AI 辅助测试：</b>熟练使用 Codex、ChatGPT、Dify 等 AI 工具辅助测试工作，具备 AI 测试提效实践经验；能够利用大模型进行需求分析、测试用例设计、测试数据生成及自动化脚本编写，提升测试效率。",
+            "<b>接口自动化测试：</b>熟悉 Python + Requests + Pytest + Allure 接口自动化测试技术栈，具备接口自动化框架搭建、测试脚本编写及维护经验；能够结合 AI 辅助分析接口文档，生成测试用例及自动化代码。",
+            "<b>接口功能测试：</b>熟练使用 Postman 进行接口测试，能够根据接口文档设计测试用例，完成接口参数校验、异常场景测试、Token 鉴权、接口关联及多接口业务流程测试。",
+            "<b>抓包与网络测试：</b>熟悉 Fiddler 抓包工具，能够抓取 HTTP 请求及响应报文，模拟网络延迟等场景。",
+            "<b>性能测试：</b>熟悉 JMeter 性能测试工具，能够编写接口测试脚本，配置线程组、参数化、关联提取及断言，完成基础并发测试，并分析响应时间、吞吐量及错误率等性能指标。",
+            "<b>移动端测试：</b>熟悉 Appium 移动端自动化测试及 Monkey 稳定性测试，掌握常用 ADB 命令，能够进行日志抓取、应用安装卸载、设备调试及 CPU、内存等基础性能数据采集。",
+            "<b>数据库测试：</b>熟悉 MySQL 常用 SQL 语句，能够使用 Navicat 进行数据增删改查、多表关联查询及数据校验，具备通过数据库辅助验证业务数据一致性的能力。",
+            "<b>Linux 与环境部署：</b>熟悉 Linux 常用命令，能够进行测试环境部署、日志查看、进程管理及基础问题排查。"
           ]) +
-        entry("获得证书", "", "", "", "",
+        entry("奖项证书", "", "", "", "",
           [
-            "英语六级（CET-6）564 · 软考中级 · C1 驾驶证 · 计算机二级",
-            "省级优秀毕业生 · 国家奖学金 · 国家励志奖学金 · 创新创业大赛省级奖项 · 绩点 3.96/4.0"
+            "英语六级 564 分（CET-6） · 软考中级 · 计算机二级 · C1 驾驶证",
+            "省级优秀毕业生 · 校级优秀毕业生 · 国家励志奖学金（两次） · 创新创业大赛省级奖项"
           ])
     }
   };
@@ -120,73 +114,25 @@
   /* ================= 工具 ================= */
   function $(sel) { return document.querySelector(sel); }
 
-  /* ================= 开场视频 ================= */
-  var intro = $("#intro");
-  var video = $("#intro-video");
-  var fallback = $("#intro-fallback");
-  var introDone = false;
-  var fallbackTimer = null;
-
-  video.muted = true;
-  video.defaultMuted = true;
-  video.volume = 0;
-  video.setAttribute("muted", "");
-  video.setAttribute("autoplay", "");
-  video.setAttribute("playsinline", "");
-  video.autoplay = true;
-
-  function playIntro() {
-    if (introDone) return;
-    video.muted = true;
-    video.defaultMuted = true;
-    video.volume = 0;
-    var promise = video.play();
-    if (promise && promise.catch) {
-      promise.catch(function () {
-        // 某些本地文件环境会在第一次调用时拒绝自动播放；保持开场层可见，稍后重试。
-      });
-    }
-  }
-
-  function startIntroWhenReady() {
-    if (!introDone) playIntro();
-  }
-
-  function showStage() {
-    if (introDone) return;
-    introDone = true;
-    if (fallbackTimer) window.clearTimeout(fallbackTimer);
-    intro.classList.add("is-hidden");
-    try { video.pause(); } catch (e) {}
-  }
-
-  video.addEventListener("ended", showStage);
-  video.addEventListener("error", function () {
-    // 视频加载失败 → 显示静态封面
-    video.style.display = "none";
-    fallback.hidden = false;
-    fallbackTimer = window.setTimeout(showStage, 1000);
-  }, true);
-
-  video.addEventListener("loadedmetadata", startIntroWhenReady);
-  video.addEventListener("loadeddata", startIntroWhenReady);
-  video.addEventListener("canplay", startIntroWhenReady);
-  video.addEventListener("canplaythrough", startIntroWhenReady);
-  document.addEventListener("visibilitychange", function () {
-    if (!document.hidden) startIntroWhenReady();
-  });
-  document.addEventListener("pointerdown", startIntroWhenReady, { passive: true });
-  document.addEventListener("keydown", startIntroWhenReady);
-  window.setTimeout(startIntroWhenReady, 0);
-
   /* ================= 人物状态图切换 ================= */
   var stateImages = {};
   var hoverKey = null;
   var focusKey = null;
 
+  function loadStateImage(key) {
+    var image = stateImages[key];
+    if (!image || image.getAttribute("src")) return;
+    image.src = image.dataset.src;
+  }
+
   document.querySelectorAll("[data-state-image]").forEach(function (img) {
     stateImages[img.dataset.stateImage] = img;
     img.addEventListener("error", function () {
+      if (img.dataset.fallback && !img.dataset.fallbackUsed) {
+        img.dataset.fallbackUsed = "true";
+        img.src = img.dataset.fallback;
+        return;
+      }
       img.hidden = true;
       syncState();
     });
@@ -201,6 +147,7 @@
   }
 
   function setState(key, mode, on) {
+    if (on) loadStateImage(key);
     if (mode === "hover") hoverKey = on ? key : (hoverKey === key ? null : hoverKey);
     if (mode === "focus") focusKey = on ? key : (focusKey === key ? null : focusKey);
     syncState();
@@ -247,15 +194,6 @@
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
   });
-
-  /* ================= 系统减少动态 ================= */
-  var motionQuery = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
-  if (motionQuery && motionQuery.matches) showStage();
-  if (motionQuery && motionQuery.addEventListener) {
-    motionQuery.addEventListener("change", function (event) {
-      if (event.matches) showStage();
-    });
-  }
 
   // 手机端栏目入口：点击时先显示对应人物状态图再打开弹窗
   document.querySelectorAll(".mobile-nav button").forEach(function (btn) {

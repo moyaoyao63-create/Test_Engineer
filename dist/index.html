@@ -4,37 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#fbfaf6" />
-    <meta name="description" content="Moyao 的个人简历网站：AI 数据交付 / 测试开发。" />
-    <title>Moyao / PORTFOLIO</title>
-    <link rel="preload" as="image" href="./assets/封面.png" />
+    <meta name="description" content="莫瑶的个人简历网站：测试工程师。" />
+    <title>莫瑶 / PORTFOLIO</title>
+    <link rel="preload" as="image" href="./assets/封面.webp" fetchpriority="high" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <!-- 开场视频 -->
-    <section class="intro" id="intro" aria-label="开场视频">
-      <video
-        class="intro-video"
-        id="intro-video"
-        autoplay
-        muted
-        playsinline
-        preload="auto"
-        poster="./assets/封面.png"
-      >
-        <source src="./assets/去除水印.mp4" type="video/mp4" />
-      </video>
-      <img class="intro-fallback" id="intro-fallback" src="./assets/封面.png" alt="" hidden />
-    </section>
-
     <!-- 主画面：封面 + 四张人物状态图热区 -->
     <main class="stage" id="stage" aria-label="个人简历主画面">
       <div class="scene" id="scene">
-        <img class="cover" src="./assets/封面.png" alt="Moyao 个人简历主画面：四张票券分别是项目经历、工作经历、GitHub 项目、技能工具" draggable="false" />
+        <img class="cover" src="./assets/封面.webp" alt="莫瑶个人简历主画面：四张票券分别是项目经历、工作经历、GitHub 项目、技能工具" fetchpriority="high" decoding="async" draggable="false" />
 
-        <img class="state-image state-projects" data-state-image="projects" src="./assets/01.png" alt="" aria-hidden="true" draggable="false" />
-        <img class="state-image state-experience" data-state-image="experience" src="./assets/02.png" alt="" aria-hidden="true" draggable="false" />
-        <img class="state-image state-github" data-state-image="github" src="./assets/03.png" alt="" aria-hidden="true" draggable="false" />
-        <img class="state-image state-skills" data-state-image="skills" src="./assets/04.png" alt="" aria-hidden="true" draggable="false" />
+        <img class="state-image state-projects" data-state-image="projects" data-src="./assets/01.webp" data-fallback="./assets/01.png" loading="lazy" decoding="async" alt="" aria-hidden="true" draggable="false" />
+        <img class="state-image state-experience" data-state-image="experience" data-src="./assets/02.webp" data-fallback="./assets/02.png" loading="lazy" decoding="async" alt="" aria-hidden="true" draggable="false" />
+        <img class="state-image state-github" data-state-image="github" data-src="./assets/03.webp" data-fallback="./assets/03.png" loading="lazy" decoding="async" alt="" aria-hidden="true" draggable="false" />
+        <img class="state-image state-skills" data-state-image="skills" data-src="./assets/04.webp" data-fallback="./assets/04.png" loading="lazy" decoding="async" alt="" aria-hidden="true" draggable="false" />
 
         <button class="hotspot hs-projects" data-ticket="projects" aria-label="01 项目经历：查看详情"></button>
         <button class="hotspot hs-experience" data-ticket="experience" aria-label="02 工作经历：查看详情"></button>
