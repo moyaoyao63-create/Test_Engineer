@@ -1,7 +1,7 @@
 :root {
   color-scheme: only light;
-  --paper: #fbfaf6;
-  --paper-deep: #ece8de;
+  --paper: #f8f7f2;
+  --paper-deep: #eeece4;
   --ink: #111111;
   --muted: #777163;
   --red: #e0201b;
@@ -15,7 +15,7 @@
 html { min-height: 100%; }
 body {
   min-height: 100%;
-  background: var(--paper);
+  background: radial-gradient(circle at 50% 16%, #fffefa 0%, var(--paper) 66%, var(--paper-deep) 100%);
   color: var(--ink);
   font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
   overflow-x: hidden;
@@ -126,7 +126,7 @@ img { display: block; max-width: 100%; user-select: none; }
 }
 .person {
   position: absolute;
-  z-index: 3;
+  z-index: 20;
   left: 50%;
   bottom: -8%;
   width: auto;
@@ -140,7 +140,7 @@ img { display: block; max-width: 100%; user-select: none; }
 }
 
 /* 首页两侧手写式文案 */
-.hero-copy { position: absolute; z-index: 2; }
+.hero-copy { position: absolute; z-index: 5; }
 .hero-copy-left {
   left: 1.2%;
   bottom: 9%;
@@ -181,7 +181,7 @@ img { display: block; max-width: 100%; user-select: none; }
 .copy-heart { color: var(--red); font-family: sans-serif; font-size: 31px; }
 .hero-slogan {
   position: absolute;
-  z-index: 2;
+  z-index: 5;
   right: 1.7%;
   bottom: 7%;
   display: flex;
@@ -209,17 +209,17 @@ img { display: block; max-width: 100%; user-select: none; }
 /* ============ CSS 票券 ============ */
 .ticket {
   position: absolute;
-  z-index: 7;
+  z-index: 30;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: clamp(190px, 21%, 320px);
-  aspect-ratio: 1.45;
-  padding: 5.5% 7% 4.5%;
+  width: clamp(230px, 22%, 340px);
+  height: clamp(148px, 18vh, 180px);
+  padding: 17px 21px 13px;
   overflow: visible;
   background: linear-gradient(135deg, #fffefa 0%, #fffdf8 100%);
   border: 3px solid var(--ink);
-  border-radius: 9px;
+  border-radius: 4px;
   box-shadow: var(--shadow);
   text-align: left;
   transform-origin: center;
@@ -241,7 +241,7 @@ img { display: block; max-width: 100%; user-select: none; }
 .ticket::after { right: -16px; }
 .ticket:hover,
 .ticket:focus-visible {
-  z-index: 12;
+  z-index: 40;
   background: #fff;
   box-shadow: 12px 13px 0 rgba(17, 17, 17, 0.9);
   outline: none;
@@ -269,7 +269,7 @@ img { display: block; max-width: 100%; user-select: none; }
   font-weight: 950;
   letter-spacing: -0.08em;
   line-height: 1.05;
-  white-space: normal;
+  white-space: nowrap;
 }
 .ticket em {
   margin-top: 5px;
