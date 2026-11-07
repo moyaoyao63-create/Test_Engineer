@@ -211,7 +211,7 @@ img { display: block; max-width: 100%; user-select: none; }
 .ticket-grid {
   position: absolute;
   z-index: 30;
-  top: clamp(20px, 3vw, 46px);
+  top: clamp(48px, 5vw, 72px);
   right: 2.5%;
   left: 2.5%;
   display: grid;
