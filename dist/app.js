@@ -38,8 +38,6 @@
         '<div class="m-info">' +
           '<div><b>年龄 / 经验</b>24 岁 · 工作年限 2 年</div>' +
           '<div><b>求职意向</b>测试工程师</div>' +
-          '<div><b>毕业院校</b>湖南财政经济学院（一本）</div>' +
-          '<div><b>学历 / 专业</b>全日制本科 · 计算机科学与技术</div>' +
         "</div>" +
         entry("湖南省鼎立电气科技有限公司", "2024年3月 ~ 2026年4月", "测试工程师", "", "",
           [
@@ -47,28 +45,6 @@
             "<b>AI 测试提效与工具建设：</b>参与 AI 测试提效工具开发与平台化建设，完成 AI 用例生成工作流和 API 调用封装，并根据需求开发 CAN 协议转换、CAN 数据构造及自动化发送等 Python 脚本。",
             "<b>质量保障前移：</b>主动梳理历史质量痛点，构建历史缺陷库与专项自测 CheckList，推动质量保障前移（测试左移），赋能研发人员在编码阶段开展精准自测，同类缺陷重复发生率降低 30%。"
           ]) +
-        entry("教育经历", "", "", "", "<b>院校：</b>湖南财政经济学院（一本）<br><b>专业：</b>软件学院 · 计算机科学与技术 · 全日制本科<br><b>时间 / 地点：</b>2022年9月 ~ 2024年6月 · 长沙<br><b>成绩：</b>绩点 3.97 / 4.0 · 省级优秀毕业生", []) +
-        entry("奖项证书", "", "", "", "", [
-          "英语六级 564 分（CET-6） · 软考中级 · 计算机二级 · C1 驾驶证",
-          "省级优秀毕业生 · 校级优秀毕业生 · 国家励志奖学金（两次） · 创新创业大赛省级奖项"
-        ]) +
-        entry("自我评价", "", "", "", "",
-          [
-            "具备良好的沟通表达能力和团队协作意识，能够主动与团队成员沟通协作，及时反馈并推动问题解决。",
-            "学习能力较强，善于主动学习新技术、新工具，并能够结合实际工作快速掌握，具备较强的自我驱动力。",
-            "工作认真负责，责任心强，具有良好的抗压能力，能够合理安排工作优先级，按时完成工作目标。",
-            "具备较强的问题分析和总结能力，善于复盘工作中的问题，主动总结经验并优化工作方法。"
-          ])
-    },
-
-    github: {
-      no: "03", en: "OPEN SOURCE", title: "GitHub 项目",
-      html: '<p class="m-note">简历中未提供 GitHub 项目或仓库地址。</p>'
-    },
-
-    skills: {
-      no: "04", en: "SKILLS", title: "技能工具",
-      html:
         entry("专业技能", "", "", "", "",
           [
             "<b>AI 辅助测试：</b>熟练使用 Codex、ChatGPT、Dify 等 AI 工具辅助测试工作，具备 AI 测试提效实践经验；能够利用大模型进行需求分析、测试用例设计、测试数据生成及自动化脚本编写，提升测试效率。",
@@ -80,6 +56,54 @@
             "<b>数据库测试：</b>熟悉 MySQL 常用 SQL 语句，能够使用 Navicat 进行数据增删改查、多表关联查询及数据校验，具备通过数据库辅助验证业务数据一致性的能力。",
             "<b>Linux 与环境部署：</b>熟悉 Linux 常用命令，能够进行测试环境部署、日志查看、进程管理及基础问题排查。"
           ]) +
+        entry("自我评价", "", "", "", "",
+          [
+            "具备良好的沟通表达能力和团队协作意识，能够主动与团队成员沟通协作，及时反馈并推动问题解决。",
+            "学习能力较强，善于主动学习新技术、新工具，并能够结合实际工作快速掌握，具备较强的自我驱动力。",
+            "工作认真负责，责任心强，具有良好的抗压能力，能够合理安排工作优先级，按时完成工作目标。",
+            "具备较强的问题分析和总结能力，善于复盘工作中的问题，主动总结经验并优化工作方法。"
+          ])
+    },
+
+    github: {
+      no: "03", en: "OPEN SOURCE", title: "GitHub 项目",
+      html:
+        repo(
+          "个人简历网站",
+          "基于 HTML、CSS 与 JavaScript 构建的交互式个人简历网站，通过响应式布局和弹窗信息卡片展示项目经历、工作经历、GitHub 项目及教育经历。",
+          "HTML · CSS · JavaScript · Cloudflare",
+          "https://github.com/moyaoyao63-create/Test_Engineer"
+        ) +
+        repo(
+          "CAN 数据清洗与转换工具",
+          "支持导入 Excel / XLS / CSV 协议文件，按约定字段完成 CAN 数据清洗、转换与 TXT 文件生成，方便后续报文测试和总线发送。",
+          "Python · Tkinter · Pandas · Excel / CSV",
+          "",
+          "./assets/can-protocol-converter.png",
+          "协议文件转 TXT 工具截图"
+        ) +
+        repo(
+          "CAN 批量数据生成工具",
+          "支持配置帧 ID、文件名、镜像数据、跳跃模式、标准帧 / 扩展帧及多列联合模式，批量生成 CAN 测试数据。",
+          "Python · Web UI · CAN 数据构造",
+          "",
+          "./assets/can-data-generator.png",
+          "CAN 批量数据生成工具截图"
+        ) +
+        repo(
+          "CAN 总线监控工具",
+          "支持 TXT、CSV、CAN 文件批量加载与发送，提供设备连接、开始 / 停止监控、收发计数及 CAN 报文实时展示能力。",
+          "Python · USBCAN · CAN 总线监控",
+          "",
+          "./assets/can-bus-monitor.png",
+          "CAN 总线监控工具截图"
+        )
+    },
+
+    skills: {
+      no: "04", en: "EDUCATION", title: "教育经历及奖项",
+      html:
+        entry("教育经历", "", "", "", "<b>院校：</b>湖南财政经济学院（一本）<br><b>专业：</b>软件学院 · 计算机科学与技术 · 全日制本科<br><b>时间 / 地点：</b>2022年9月 ~ 2024年6月 · 长沙<br><b>成绩：</b>绩点 3.97 / 4.0 · 省级优秀毕业生", []) +
         entry("奖项证书", "", "", "", "",
           [
             "英语六级 564 分（CET-6） · 软考中级 · 计算机二级 · C1 驾驶证",
@@ -99,14 +123,17 @@
     return h + "</section>";
   }
 
-  function repo(name, desc, stack, url) {
+  function repo(name, desc, stack, url, image, alt) {
     var h = '<section class="m-entry"><div class="m-entry-title"><h3>' + name + "</h3></div>";
     h += '<p class="m-desc">' + desc + "</p>";
     if (stack) h += '<p class="m-stack"><b>技术栈：</b>' + stack + "</p>";
+    if (image) {
+      h += '<figure class="repo-shot"><img src="' + image + '" alt="' + alt + '" loading="lazy" decoding="async" /><figcaption>' + alt + '</figcaption></figure>';
+    }
     if (url) {
       h += '<a class="entry-action" href="' + url + '" target="_blank" rel="noreferrer">查看仓库 ↗</a>';
     } else {
-      h += '<span class="entry-action entry-action-disabled">简历未提供仓库地址</span>';
+      h += '<span class="entry-action entry-action-disabled">项目地址待补充</span>';
     }
     return h + "</section>";
   }

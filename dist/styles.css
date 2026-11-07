@@ -141,6 +141,26 @@ img { user-select: none; }
 .m-info div { border: 1.5px solid rgba(17,17,17,0.2); border-radius: 8px; padding: 7px 10px; font-size: 12.5px; color: #55503f; background: var(--paper); }
 .m-info b { display: block; font-size: 11px; letter-spacing: 0.12em; color: #99937f; margin-bottom: 2px; }
 .m-note { font-size: 12px; color: #99937f; margin: 2px 2px 12px; }
+.repo-shot {
+  margin: 12px 0 2px;
+  border: 1.5px solid rgba(17, 17, 17, 0.18);
+  border-radius: 9px;
+  overflow: hidden;
+  background: var(--paper);
+}
+.repo-shot img {
+  display: block;
+  width: 100%;
+  max-height: 340px;
+  object-fit: contain;
+  background: #f1f0ec;
+}
+.repo-shot figcaption {
+  padding: 6px 9px;
+  font-size: 11px;
+  color: #777163;
+  border-top: 1px solid rgba(17, 17, 17, 0.12);
+}
 
 /* ============ 手机端 ============ */
 @media (max-width: 760px) {
