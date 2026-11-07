@@ -1,4 +1,5 @@
 :root {
+  color-scheme: only light;
   --paper: #fbfaf6;
   --paper-deep: #ece8de;
   --ink: #111111;
@@ -264,13 +265,11 @@ img { display: block; max-width: 100%; user-select: none; }
 .ticket strong {
   max-width: 100%;
   margin-top: 5px;
-  overflow: hidden;
   font-size: clamp(16px, 1.65vw, 27px);
   font-weight: 950;
   letter-spacing: -0.08em;
   line-height: 1.05;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: normal;
 }
 .ticket em {
   margin-top: 5px;
