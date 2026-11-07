@@ -1,8 +1,7 @@
-/* 莫瑶 / PORTFOLIO —— 内容根据用户提供的简历-hlwai.docx 整理，未添加虚构信息 */
+/* 莫瑶 / PORTFOLIO —— 纯 HTML / CSS / JavaScript 交互 */
 (function () {
   "use strict";
 
-  /* ================= 简历数据 ================= */
   var DATA = {
     projects: {
       no: "01", en: "PROJECTS", title: "项目经历",
@@ -68,39 +67,13 @@
     github: {
       no: "03", en: "OPEN SOURCE", title: "GitHub 项目",
       html:
-        repo(
-          "个人简历网站",
-          "基于 HTML、CSS 与 JavaScript 构建的交互式个人简历网站，通过响应式布局和弹窗信息卡片展示项目经历、工作经历、GitHub 项目及教育经历。",
-          "HTML · CSS · JavaScript · Cloudflare",
-          "https://github.com/moyaoyao63-create/Test_Engineer"
-        ) +
-        repo(
-          "CAN 数据清洗与转换工具",
-          "支持导入 Excel / XLS / CSV 协议文件，按约定字段完成 CAN 数据清洗、转换与 TXT 文件生成，方便后续报文测试和总线发送。",
-          "Python · Tkinter · Pandas · Excel / CSV",
-          "",
-          "./assets/can-protocol-converter.png",
-          "协议文件转 TXT 工具截图"
-        ) +
-        repo(
-          "CAN 批量数据生成工具",
-          "支持配置帧 ID、文件名、镜像数据、跳跃模式、标准帧 / 扩展帧及多列联合模式，批量生成 CAN 测试数据。",
-          "Python · Web UI · CAN 数据构造",
-          "",
-          "./assets/can-data-generator.png",
-          "CAN 批量数据生成工具截图"
-        ) +
-        repo(
-          "CAN 总线监控工具",
-          "支持 TXT、CSV、CAN 文件批量加载与发送，提供设备连接、开始 / 停止监控、收发计数及 CAN 报文实时展示能力。",
-          "Python · USBCAN · CAN 总线监控",
-          "",
-          "./assets/can-bus-monitor.png",
-          "CAN 总线监控工具截图"
-        )
+        repo("个人简历网站", "基于 HTML、CSS 与 JavaScript 构建的交互式个人简历网站，通过响应式布局和弹窗信息卡片展示项目经历、工作经历、GitHub 项目及教育经历。", "HTML · CSS · JavaScript · Cloudflare", "https://github.com/moyaoyao63-create/Test_Engineer") +
+        repo("CAN 数据清洗与转换工具", "支持导入 Excel / XLS / CSV 协议文件，按约定字段完成 CAN 数据清洗、转换与 TXT 文件生成，方便后续报文测试和总线发送。", "Python · Tkinter · Pandas · Excel / CSV", "", "./assets/can-protocol-converter.png", "协议文件转 TXT 工具截图") +
+        repo("CAN 批量数据生成工具", "支持配置帧 ID、文件名、镜像数据、跳跃模式、标准帧 / 扩展帧及多列联合模式，批量生成 CAN 测试数据。", "Python · Web UI · CAN 数据构造", "", "./assets/can-data-generator.png", "CAN 批量数据生成工具截图") +
+        repo("CAN 总线监控工具", "支持 TXT、CSV、CAN 文件批量加载与发送，提供设备连接、开始 / 停止监控、收发计数及 CAN 报文实时展示能力。", "Python · USBCAN · CAN 总线监控", "", "./assets/can-bus-monitor.png", "CAN 总线监控工具截图")
     },
 
-    skills: {
+    education: {
       no: "04", en: "EDUCATION", title: "教育经历及奖项",
       html:
         entry("教育经历", "", "", "", "<b>院校：</b>湖南财政经济学院（一本）<br><b>专业：</b>软件学院 · 计算机科学与技术 · 全日制本科<br><b>时间 / 地点：</b>2022年9月 ~ 2024年6月 · 长沙<br><b>成绩：</b>绩点 3.97 / 4.0 · 省级优秀毕业生", []) +
@@ -113,122 +86,74 @@
   };
 
   function entry(title, time, role, stack, desc, items) {
-    var h = '<section class="m-entry"><div class="m-entry-title"><h3>' + title + "</h3>";
-    if (time) h += '<span class="m-time">' + time + "</span>";
-    if (role) h += '<span class="m-role">' + role + "</span>";
-    h += "</div>";
-    if (stack) h += '<p class="m-stack"><b>技术栈：</b>' + stack + "</p>";
-    if (desc) h += '<p class="m-desc">' + desc + "</p>";
-    if (items && items.length) h += '<ul class="m-list">' + items.map(function (i) { return "<li>" + i + "</li>"; }).join("") + "</ul>";
-    return h + "</section>";
+    var html = '<section class="m-entry"><div class="m-entry-title"><h3>' + title + "</h3>";
+    if (time) html += '<span class="m-time">' + time + "</span>";
+    if (role) html += '<span class="m-role">' + role + "</span>";
+    html += "</div>";
+    if (stack) html += '<p class="m-stack"><b>技术栈：</b>' + stack + "</p>";
+    if (desc) html += '<p class="m-desc">' + desc + "</p>";
+    if (items && items.length) html += '<ul class="m-list">' + items.map(function (item) { return "<li>" + item + "</li>"; }).join("") + "</ul>";
+    return html + "</section>";
   }
 
   function repo(name, desc, stack, url, image, alt) {
-    var h = '<section class="m-entry"><div class="m-entry-title"><h3>' + name + "</h3></div>";
-    h += '<p class="m-desc">' + desc + "</p>";
-    if (stack) h += '<p class="m-stack"><b>技术栈：</b>' + stack + "</p>";
-    if (image) {
-      h += '<figure class="repo-shot"><img src="' + image + '" alt="' + alt + '" loading="lazy" decoding="async" /><figcaption>' + alt + '</figcaption></figure>';
-    }
+    var html = '<section class="m-entry"><div class="m-entry-title"><h3>' + name + "</h3></div>";
+    html += '<p class="m-desc">' + desc + "</p>";
+    if (stack) html += '<p class="m-stack"><b>技术栈：</b>' + stack + "</p>";
+    if (image) html += '<figure class="repo-shot"><img src="' + image + '" alt="' + alt + '" loading="lazy" decoding="async" /><figcaption>' + alt + "</figcaption></figure>";
     if (url) {
-      h += '<a class="entry-action" href="' + url + '" target="_blank" rel="noreferrer">查看仓库 ↗</a>';
+      html += '<a class="entry-action" href="' + url + '" target="_blank" rel="noreferrer">查看仓库 ↗</a>';
     } else {
-      h += '<span class="entry-action entry-action-disabled">项目地址待补充</span>';
+      html += '<span class="entry-action entry-action-disabled">项目地址待补充</span>';
     }
-    return h + "</section>";
+    return html + "</section>";
   }
 
-  /* ================= 工具 ================= */
-  function $(sel) { return document.querySelector(sel); }
-
-  /* ================= 人物状态图切换 ================= */
-  var stateImages = {};
-  var hoverKey = null;
-  var focusKey = null;
-
-  function loadStateImage(key) {
-    var image = stateImages[key];
-    if (!image || image.getAttribute("src")) return;
-    image.src = image.dataset.src;
-  }
-
-  document.querySelectorAll("[data-state-image]").forEach(function (img) {
-    stateImages[img.dataset.stateImage] = img;
-    img.addEventListener("error", function () {
-      if (img.dataset.fallback && !img.dataset.fallbackUsed) {
-        img.dataset.fallbackUsed = "true";
-        img.src = img.dataset.fallback;
-        return;
-      }
-      img.hidden = true;
-      syncState();
-    });
-  });
-
-  function syncState() {
-    var activeKey = focusKey || hoverKey;
-    Object.keys(stateImages).forEach(function (key) {
-      var image = stateImages[key];
-      image.classList.toggle("is-active", key === activeKey && !image.hidden);
-    });
-  }
-
-  function setState(key, mode, on) {
-    if (on) loadStateImage(key);
-    if (mode === "hover") hoverKey = on ? key : (hoverKey === key ? null : hoverKey);
-    if (mode === "focus") focusKey = on ? key : (focusKey === key ? null : focusKey);
-    syncState();
-  }
-
-  document.querySelectorAll(".hotspot").forEach(function (spot) {
-    var key = spot.dataset.ticket;
-    spot.addEventListener("mouseenter", function () { setState(key, "hover", true); });
-    spot.addEventListener("mouseleave", function () { setState(key, "hover", false); });
-    spot.addEventListener("focus", function () { setState(key, "focus", true); });
-    spot.addEventListener("blur", function () { setState(key, "focus", false); });
-    spot.addEventListener("click", function () { openModal(key); });
-  });
-
-  /* ================= 弹窗 ================= */
-  var modal = $("#modal");
-  var modalBody = $("#modal-body");
+  var modal = document.querySelector("#modal");
+  var modalBody = document.querySelector("#modal-body");
   var lastFocus = null;
 
-  function openModal(key) {
-    var d = DATA[key];
-    if (!d) return;
-    $("#modal-no").textContent = d.no;
-    $("#modal-en").textContent = d.en;
-    $("#modal-title").textContent = d.title;
-    modalBody.innerHTML = d.html;
+  function setExpanded(key, expanded) {
+    document.querySelectorAll('[data-ticket="' + key + '"]').forEach(function (button) {
+      button.setAttribute("aria-expanded", expanded ? "true" : "false");
+    });
+  }
+
+  function openModal(key, trigger) {
+    var data = DATA[key];
+    if (!data) return;
+    document.querySelector("#modal-no").textContent = data.no;
+    document.querySelector("#modal-en").textContent = data.en;
+    document.querySelector("#modal-title").textContent = data.title;
+    modalBody.innerHTML = data.html;
     modalBody.scrollTop = 0;
-    lastFocus = document.activeElement;
+    lastFocus = trigger || document.activeElement;
+    setExpanded(key, true);
     modal.classList.add("is-open");
     modal.setAttribute("aria-hidden", "false");
-    $("#modal-close").focus();
+    document.body.classList.add("modal-open");
+    document.querySelector("#modal-close").focus();
   }
 
   function closeModal() {
     modal.classList.remove("is-open");
     modal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("modal-open");
+    document.querySelectorAll("[aria-expanded='true']").forEach(function (button) { button.setAttribute("aria-expanded", "false"); });
     if (lastFocus && lastFocus.focus) lastFocus.focus();
   }
 
-  modal.addEventListener("click", function (e) {
-    if (e.target.closest("[data-close]") || e.target === modal) closeModal();
-  });
-  $("#modal-close").addEventListener("click", closeModal);
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
+  document.querySelectorAll(".ticket, .mobile-nav button").forEach(function (button) {
+    var key = button.dataset.ticket;
+    button.setAttribute("aria-expanded", "false");
+    button.addEventListener("click", function () { openModal(key, button); });
   });
 
-  // 手机端栏目入口：点击时先显示对应人物状态图再打开弹窗
-  document.querySelectorAll(".mobile-nav button").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      var key = btn.dataset.ticket;
-      setState(key, "focus", true);
-      setTimeout(function () { setState(key, "focus", false); }, 420);
-      openModal(key);
-    });
+  modal.addEventListener("click", function (event) {
+    if (event.target.closest("[data-close]")) closeModal();
+  });
+  document.querySelector("#modal-close").addEventListener("click", closeModal);
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && modal.classList.contains("is-open")) closeModal();
   });
 })();

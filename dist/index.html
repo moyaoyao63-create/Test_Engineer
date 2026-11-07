@@ -4,38 +4,92 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#fbfaf6" />
-    <meta name="description" content="莫瑶的个人简历网站：测试工程师。" />
+    <meta name="description" content="莫瑶的个人简历网站：测试工程师，专注 AI 辅助测试、接口自动化与 CAN 工具建设。" />
     <title>莫瑶 / PORTFOLIO</title>
-    <link rel="preload" as="image" href="./assets/封面.webp" fetchpriority="high" />
+    <link rel="preload" as="image" href="./assets/person.png" fetchpriority="high" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <!-- 主画面：封面 + 四张人物状态图热区 -->
-    <main class="stage" id="stage" aria-label="个人简历主画面">
-      <div class="scene" id="scene">
-        <img class="cover" src="./assets/封面.webp" alt="莫瑶个人简历主画面：四张票券分别是项目经历、工作经历、GitHub 项目、教育经历及奖项" fetchpriority="high" decoding="async" draggable="false" />
+    <main class="site-shell" id="site-shell" aria-label="莫瑶个人简历网站">
+      <header class="topbar">
+        <a class="brand" href="./" aria-label="返回主页"><strong>Moyao</strong><span>/</span><span>PORTFOLIO</span></a>
+        <span class="topbar-rule" aria-hidden="true"></span>
+        <span class="topbar-meta">TEST · AUTOMATION · AI <i aria-hidden="true"></i></span>
+      </header>
 
-        <img class="state-image state-projects" data-state-image="projects" data-src="./assets/01.webp" data-fallback="./assets/01.png" loading="lazy" decoding="async" alt="" aria-hidden="true" draggable="false" />
-        <img class="state-image state-experience" data-state-image="experience" data-src="./assets/02.webp" data-fallback="./assets/02.png" loading="lazy" decoding="async" alt="" aria-hidden="true" draggable="false" />
-        <img class="state-image state-github" data-state-image="github" data-src="./assets/03.webp" data-fallback="./assets/03.png" loading="lazy" decoding="async" alt="" aria-hidden="true" draggable="false" />
-        <img class="state-image state-skills" data-state-image="skills" data-src="./assets/04.webp" data-fallback="./assets/04.png" loading="lazy" decoding="async" alt="" aria-hidden="true" draggable="false" />
+      <section class="hero" aria-label="个人介绍与栏目入口">
+        <div class="hero-ghost" aria-hidden="true">CREATE</div>
 
-        <button class="hotspot hs-projects" data-ticket="projects" aria-label="01 项目经历：查看详情"></button>
-        <button class="hotspot hs-experience" data-ticket="experience" aria-label="02 工作经历：查看详情"></button>
-        <button class="hotspot hs-github" data-ticket="github" aria-label="03 GitHub 项目：查看详情"></button>
-        <button class="hotspot hs-skills" data-ticket="skills" aria-label="04 教育经历及奖项：查看详情"></button>
-      </div>
+        <div class="hero-copy hero-copy-left">
+          <span class="copy-mark" aria-hidden="true">↘</span>
+          <p>Moyao</p>
+          <p>ABOUT ME</p>
+          <h1>个人介绍</h1>
+        </div>
 
-      <!-- 手机端栏目入口 -->
+        <div class="hero-copy hero-copy-right">
+          <span class="copy-heart" aria-hidden="true">♡</span>
+          <p>爱好</p>
+          <p>看电影</p>
+          <p>看书</p>
+          <p>探索新工具</p>
+        </div>
+
+        <div class="hero-slogan" aria-hidden="true">
+          <span>Stay curious.</span>
+          <small>MAKE THINGS HAPPEN.</small>
+        </div>
+
+        <img class="person" src="./assets/person.png" alt="人物插画" fetchpriority="high" decoding="async" draggable="false" />
+
+        <button class="ticket ticket-projects" data-ticket="projects" type="button" aria-label="01 项目经历：查看详情">
+          <span class="ticket-number">01</span>
+          <strong>项目经历</strong>
+          <em>PROJECTS</em>
+          <small>从需求分析～落地实现</small>
+          <span class="ticket-dots" aria-hidden="true"></span>
+          <span class="ticket-barcode" aria-hidden="true"></span>
+        </button>
+
+        <button class="ticket ticket-experience" data-ticket="experience" type="button" aria-label="02 工作经历：查看详情">
+          <span class="ticket-number">02</span>
+          <strong>工作经历</strong>
+          <em>EXPERIENCE</em>
+          <small>互联网科技</small>
+          <span class="ticket-dots" aria-hidden="true"></span>
+          <span class="ticket-barcode" aria-hidden="true"></span>
+        </button>
+
+        <button class="ticket ticket-github" data-ticket="github" type="button" aria-label="03 GitHub 项目：查看详情">
+          <span class="ticket-number">03</span>
+          <strong>GitHub 项目</strong>
+          <em>OPEN SOURCE</em>
+          <small>小工具 / 开源实践</small>
+          <span class="ticket-dots" aria-hidden="true"></span>
+          <span class="ticket-barcode" aria-hidden="true"></span>
+        </button>
+
+        <button class="ticket ticket-education" data-ticket="education" type="button" aria-label="04 教育经历及奖项：查看详情">
+          <span class="ticket-number">04</span>
+          <strong>教育经历</strong>
+          <em>EDUCATION</em>
+          <small>学习成长 / 荣誉证书</small>
+          <span class="ticket-dots" aria-hidden="true"></span>
+          <span class="ticket-barcode" aria-hidden="true"></span>
+        </button>
+
+        <span class="hero-spark spark-one" aria-hidden="true">〰</span>
+        <span class="hero-spark spark-two" aria-hidden="true">╱╱</span>
+      </section>
+
       <nav class="mobile-nav" aria-label="栏目入口">
         <button type="button" data-ticket="projects"><i>01</i>项目经历</button>
         <button type="button" data-ticket="experience"><i>02</i>工作经历</button>
         <button type="button" data-ticket="github"><i>03</i>GitHub</button>
-        <button type="button" data-ticket="skills"><i>04</i>教育经历及奖项</button>
+        <button type="button" data-ticket="education"><i>04</i>教育经历</button>
       </nav>
     </main>
 
-    <!-- 详情弹窗 -->
     <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
       <div class="modal-backdrop" data-close></div>
       <article class="modal-card">
