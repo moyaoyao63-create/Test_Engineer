@@ -79,12 +79,13 @@ img { display: block; max-width: 100%; user-select: none; }
 /* ============ 纯代码首页 ============ */
 .hero {
   position: relative;
+  z-index: 25;
   width: 100%;
   max-width: 1680px;
   height: clamp(570px, calc(100vh - 108px), 780px);
   min-height: 570px;
   margin: 0 auto;
-  overflow: hidden;
+  overflow: visible;
   isolation: isolate;
 }
 .hero::before {
