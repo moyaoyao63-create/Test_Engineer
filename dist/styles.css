@@ -79,13 +79,13 @@ img { display: block; max-width: 100%; user-select: none; }
 /* ============ 纯代码首页 ============ */
 .hero {
   position: relative;
-  z-index: 25;
+  z-index: 1;
   width: 100%;
   max-width: 1680px;
   height: clamp(570px, calc(100vh - 108px), 780px);
   min-height: 570px;
   margin: 0 auto;
-  overflow: visible;
+  overflow: hidden;
   isolation: isolate;
 }
 .hero::before {
@@ -131,7 +131,7 @@ img { display: block; max-width: 100%; user-select: none; }
   left: 50%;
   bottom: -8%;
   width: auto;
-  height: min(75vh, 690px);
+  height: min(70vh, 640px);
   max-width: 68%;
   object-fit: contain;
   object-position: center bottom;
@@ -211,14 +211,14 @@ img { display: block; max-width: 100%; user-select: none; }
 .ticket-grid {
   position: absolute;
   z-index: 30;
-  top: clamp(8px, 1.8vw, 28px);
+  top: clamp(20px, 3vw, 46px);
   right: 2.5%;
   left: 2.5%;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   grid-template-rows: repeat(2, auto);
-  column-gap: clamp(52px, 7vw, 110px);
-  row-gap: clamp(24px, 3.6vw, 54px);
+  column-gap: clamp(42px, 5.5vw, 92px);
+  row-gap: clamp(32px, 4vw, 64px);
   align-items: start;
 }
 .ticket {
@@ -261,14 +261,14 @@ img { display: block; max-width: 100%; user-select: none; }
   outline: none;
 }
 .ticket:focus-visible { outline: 3px dashed var(--red); outline-offset: 6px; }
-.ticket-projects { grid-column: 1; grid-row: 2; transform: rotate(-6deg); }
-.ticket-projects:hover, .ticket-projects:focus-visible { transform: rotate(-6deg) translateY(-10px) scale(1.04); }
-.ticket-experience { grid-column: 2; grid-row: 1; top: clamp(-56px, -3.6vw, -36px); transform: rotate(-6deg); }
-.ticket-experience:hover, .ticket-experience:focus-visible { transform: rotate(-6deg) translateY(-10px) scale(1.04); }
-.ticket-github { grid-column: 3; grid-row: 1; top: clamp(-56px, -3.6vw, -36px); transform: rotate(6deg); }
-.ticket-github:hover, .ticket-github:focus-visible { transform: rotate(6deg) translateY(-10px) scale(1.04); }
-.ticket-education { grid-column: 4; grid-row: 2; transform: rotate(6deg); }
-.ticket-education:hover, .ticket-education:focus-visible { transform: rotate(6deg) translateY(-10px) scale(1.04); }
+.ticket-projects { grid-column: 1; grid-row: 2; transform: rotate(-10deg); }
+.ticket-projects:hover, .ticket-projects:focus-visible { transform: rotate(-10deg) translateY(-10px) scale(1.04); }
+.ticket-experience { grid-column: 2; grid-row: 1; top: 0; transform: rotate(-7deg); }
+.ticket-experience:hover, .ticket-experience:focus-visible { transform: rotate(-7deg) translateY(-10px) scale(1.04); }
+.ticket-github { grid-column: 3; grid-row: 1; top: 0; transform: rotate(7deg); }
+.ticket-github:hover, .ticket-github:focus-visible { transform: rotate(7deg) translateY(-10px) scale(1.04); }
+.ticket-education { grid-column: 4; grid-row: 2; transform: rotate(11deg); }
+.ticket-education:hover, .ticket-education:focus-visible { transform: rotate(11deg) translateY(-10px) scale(1.04); }
 .ticket-number {
   color: var(--red);
   font-size: clamp(40px, 4.2vw, 73px);
@@ -442,12 +442,12 @@ img { display: block; max-width: 100%; user-select: none; }
   .ticket::after { right: -11px; }
   .ticket-projects { grid-column: 1; grid-row: 2; transform: rotate(-5deg); }
   .ticket-projects:hover, .ticket-projects:focus-visible { transform: rotate(-5deg) translateY(-6px) scale(1.03); }
-  .ticket-experience { grid-column: 1; grid-row: 1; top: -20px; transform: rotate(-5deg); }
+  .ticket-experience { grid-column: 1; grid-row: 1; top: 0; transform: rotate(-7deg); }
   .ticket-experience:hover, .ticket-experience:focus-visible { transform: rotate(-5deg) translateY(-6px) scale(1.03); }
-  .ticket-github { grid-column: 2; grid-row: 1; top: -20px; transform: rotate(5deg); }
-  .ticket-github:hover, .ticket-github:focus-visible { transform: rotate(5deg) translateY(-6px) scale(1.03); }
-  .ticket-education { grid-column: 2; grid-row: 2; transform: rotate(5deg); }
-  .ticket-education:hover, .ticket-education:focus-visible { transform: rotate(5deg) translateY(-6px) scale(1.03); }
+  .ticket-github { grid-column: 2; grid-row: 1; top: 0; transform: rotate(7deg); }
+  .ticket-github:hover, .ticket-github:focus-visible { transform: rotate(7deg) translateY(-6px) scale(1.03); }
+  .ticket-education { grid-column: 2; grid-row: 2; transform: rotate(11deg); }
+  .ticket-education:hover, .ticket-education:focus-visible { transform: rotate(11deg) translateY(-6px) scale(1.03); }
   .ticket-number { font-size: 10vw; }
   .ticket strong { margin-top: 3px; font-size: 3.6vw; }
   .ticket em { margin-top: 2px; font-size: 2vw; }
