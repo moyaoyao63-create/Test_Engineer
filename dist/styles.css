@@ -263,9 +263,9 @@ img { display: block; max-width: 100%; user-select: none; }
 .ticket:focus-visible { outline: 3px dashed var(--red); outline-offset: 6px; }
 .ticket-projects { grid-column: 1; grid-row: 2; transform: rotate(-10deg); }
 .ticket-projects:hover, .ticket-projects:focus-visible { transform: rotate(-10deg) translateY(-10px) scale(1.04); }
-.ticket-experience { grid-column: 2; grid-row: 1; top: 0; transform: rotate(-7deg); }
+.ticket-experience { grid-column: 2; grid-row: 1; top: 0; left: -5px; transform: rotate(-7deg); }
 .ticket-experience:hover, .ticket-experience:focus-visible { transform: rotate(-7deg) translateY(-10px) scale(1.04); }
-.ticket-github { grid-column: 3; grid-row: 1; top: 0; transform: rotate(7deg); }
+.ticket-github { grid-column: 3; grid-row: 1; top: 0; left: 5px; transform: rotate(7deg); }
 .ticket-github:hover, .ticket-github:focus-visible { transform: rotate(7deg) translateY(-10px) scale(1.04); }
 .ticket-education { grid-column: 4; grid-row: 2; transform: rotate(11deg); }
 .ticket-education:hover, .ticket-education:focus-visible { transform: rotate(11deg) translateY(-10px) scale(1.04); }
