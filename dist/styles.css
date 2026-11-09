@@ -437,7 +437,7 @@ img { display: block; max-width: 100%; user-select: none; }
     column-gap: clamp(24px, 6vw, 36px);
     row-gap: clamp(18px, 4vw, 30px);
   }
-  .ticket { width: 100%; height: clamp(112px, 30vw, 145px); min-width: 0; padding: 10px 12px 8px; border-width: 2px; box-shadow: 4px 4px 0 rgba(17, 17, 17, 0.9); }
+  .ticket { width: 94%; justify-self: center; height: clamp(104px, 27vw, 132px); min-width: 0; padding: 9px 11px 7px; border-width: 2px; box-shadow: 4px 4px 0 rgba(17, 17, 17, 0.9); }
   .ticket::before, .ticket::after { width: 17px; height: 17px; border-width: 2px; }
   .ticket::before { left: -11px; }
   .ticket::after { right: -11px; }
@@ -449,10 +449,10 @@ img { display: block; max-width: 100%; user-select: none; }
   .ticket-github:hover, .ticket-github:focus-visible { transform: rotate(7deg) translateY(-6px) scale(1.03); }
   .ticket-education { grid-column: 2; grid-row: 2; top: -12px; transform: rotate(11deg); }
   .ticket-education:hover, .ticket-education:focus-visible { transform: rotate(11deg) translateY(-6px) scale(1.03); }
-  .ticket-number { font-size: 10vw; }
-  .ticket strong { margin-top: 3px; font-size: 3.6vw; }
-  .ticket em { margin-top: 2px; font-size: 2vw; }
-  .ticket small { margin-top: 2px; font-size: 1.9vw; }
+  .ticket-number { font-size: 9vw; }
+  .ticket strong { margin-top: 3px; font-size: 3.3vw; }
+  .ticket em { margin-top: 2px; font-size: 1.8vw; }
+  .ticket small { margin-top: 2px; font-size: 1.7vw; }
   .ticket-dots { width: 11px; height: 20px; background-size: 6px 6px; }
   .ticket-barcode { height: 6px; }
   .mobile-nav {
