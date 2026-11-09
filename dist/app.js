@@ -68,8 +68,8 @@
       no: "03", en: "OPEN SOURCE", title: "GitHub 项目",
       html:
         repo("个人简历网站", "基于 HTML、CSS 与 JavaScript 构建的交互式个人简历网站，通过响应式布局和弹窗信息卡片展示项目经历、工作经历、GitHub 项目及教育经历。", "HTML · CSS · JavaScript · Cloudflare", "https://github.com/example/moyao-portfolio") +
-        repo("CAN 数据清洗与转换工具", "支持导入 Excel / XLS / CSV 协议文件，按约定字段完成 CAN 数据清洗、转换与 TXT 文件生成，方便后续报文测试和总线发送。", "Python · Tkinter · Pandas · Excel / CSV", "https://github.com/example/can-protocol-converter", "./assets/can-protocol-converter.png", "协议文件转 TXT 工具截图") +
-        repo("CAN 批量数据生成工具", "支持配置帧 ID、文件名、镜像数据、跳跃模式、标准帧 / 扩展帧及多列联合模式，批量生成 CAN 测试数据。", "Python · Web UI · CAN 数据构造", "https://github.com/example/can-data-generator", "./assets/can-data-generator.png", "CAN 批量数据生成工具截图") +
+        repo("需求文档数据清洗与转换工具", "支持导入 Excel / XLS / CSV 需求文档，按约定字段完成数据清洗、转换与 TXT 文件生成，方便后续报文测试和总线发送。", "Python · Tkinter · Pandas · Excel / CSV", "https://github.com/example/can-protocol-converter", "./assets/can-protocol-converter.png", "协议文件转 TXT 工具截图") +
+        repo("批量数据生成工具", "支持配置帧 ID、文件名、镜像数据、跳跃模式、标准帧 / 扩展帧及多列联合模式，批量生成 CAN 测试数据。", "Python · Web UI · CAN 数据构造", "https://github.com/example/can-data-generator", "./assets/can-data-generator.png", "批量数据生成工具截图") +
         repo("CAN 总线监控工具", "支持 TXT、CSV、CAN 文件批量加载与发送，提供设备连接、开始 / 停止监控、收发计数及 CAN 报文实时展示能力。", "Python · USBCAN · CAN 总线监控", "https://github.com/example/can-bus-monitor", "./assets/can-bus-monitor.png", "CAN 总线监控工具截图")
     },
 
