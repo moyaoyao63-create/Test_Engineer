@@ -38,7 +38,7 @@
           '<div><b>年龄 / 经验</b>24 岁 · 工作年限 2 年</div>' +
           '<div><b>求职意向</b>测试工程师</div>' +
         "</div>" +
-        entry("湖南省鼎立电气科技有限公司", "2024年3月 ~ 2026年4月", "测试工程师", "", "",
+        entry("湖南省鼎立电气科技有限公司", "2024年6月 ~ 2026年4月", "测试工程师", "", "",
           [
             "<b>车载终端质量保障：</b>独立负责 Android 车载显示终端全生命周期质量保障，支撑多个战略级客户项目成功交付。",
             "<b>AI 测试提效与工具建设：</b>参与 AI 测试提效工具开发与平台化建设，完成 AI 用例生成工作流和 API 调用封装，并根据需求开发 CAN 协议转换、CAN 数据构造及自动化发送等 Python 脚本。",
@@ -67,10 +67,10 @@
     github: {
       no: "03", en: "OPEN SOURCE", title: "GitHub 项目",
       html:
-        repo("个人简历网站", "基于 HTML、CSS 与 JavaScript 构建的交互式个人简历网站，通过响应式布局和弹窗信息卡片展示项目经历、工作经历、GitHub 项目及教育经历。", "HTML · CSS · JavaScript · Cloudflare", "https://github.com/moyaoyao63-create/Test_Engineer") +
-        repo("CAN 数据清洗与转换工具", "支持导入 Excel / XLS / CSV 协议文件，按约定字段完成 CAN 数据清洗、转换与 TXT 文件生成，方便后续报文测试和总线发送。", "Python · Tkinter · Pandas · Excel / CSV", "", "./assets/can-protocol-converter.png", "协议文件转 TXT 工具截图") +
-        repo("CAN 批量数据生成工具", "支持配置帧 ID、文件名、镜像数据、跳跃模式、标准帧 / 扩展帧及多列联合模式，批量生成 CAN 测试数据。", "Python · Web UI · CAN 数据构造", "", "./assets/can-data-generator.png", "CAN 批量数据生成工具截图") +
-        repo("CAN 总线监控工具", "支持 TXT、CSV、CAN 文件批量加载与发送，提供设备连接、开始 / 停止监控、收发计数及 CAN 报文实时展示能力。", "Python · USBCAN · CAN 总线监控", "", "./assets/can-bus-monitor.png", "CAN 总线监控工具截图")
+        repo("个人简历网站", "基于 HTML、CSS 与 JavaScript 构建的交互式个人简历网站，通过响应式布局和弹窗信息卡片展示项目经历、工作经历、GitHub 项目及教育经历。", "HTML · CSS · JavaScript · Cloudflare", "https://github.com/example/moyao-portfolio") +
+        repo("CAN 数据清洗与转换工具", "支持导入 Excel / XLS / CSV 协议文件，按约定字段完成 CAN 数据清洗、转换与 TXT 文件生成，方便后续报文测试和总线发送。", "Python · Tkinter · Pandas · Excel / CSV", "https://github.com/example/can-protocol-converter", "./assets/can-protocol-converter.png", "协议文件转 TXT 工具截图") +
+        repo("CAN 批量数据生成工具", "支持配置帧 ID、文件名、镜像数据、跳跃模式、标准帧 / 扩展帧及多列联合模式，批量生成 CAN 测试数据。", "Python · Web UI · CAN 数据构造", "https://github.com/example/can-data-generator", "./assets/can-data-generator.png", "CAN 批量数据生成工具截图") +
+        repo("CAN 总线监控工具", "支持 TXT、CSV、CAN 文件批量加载与发送，提供设备连接、开始 / 停止监控、收发计数及 CAN 报文实时展示能力。", "Python · USBCAN · CAN 总线监控", "https://github.com/example/can-bus-monitor", "./assets/can-bus-monitor.png", "CAN 总线监控工具截图")
     },
 
     education: {

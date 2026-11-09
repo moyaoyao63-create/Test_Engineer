@@ -177,9 +177,13 @@ img { display: block; max-width: 100%; user-select: none; }
   font-size: clamp(18px, 1.7vw, 31px);
   line-height: 1.55;
   transform: rotate(-2deg);
+  transition: opacity 0.12s ease, visibility 0.12s ease;
 }
 .hero-copy-right p:first-of-type { color: var(--red); font-size: 1.1em; }
 .copy-heart { color: var(--red); font-family: sans-serif; font-size: 31px; }
+.hero:has(.ticket-education:hover) .hero-copy-right,
+.hero:has(.ticket-education:focus-visible) .hero-copy-right,
+body.modal-open .hero-copy-right { visibility: hidden; opacity: 0; }
 .hero-slogan {
   position: absolute;
   z-index: 5;
@@ -261,13 +265,13 @@ img { display: block; max-width: 100%; user-select: none; }
   outline: none;
 }
 .ticket:focus-visible { outline: 3px dashed var(--red); outline-offset: 6px; }
-.ticket-projects { grid-column: 1; grid-row: 2; transform: rotate(-10deg); }
+.ticket-projects { grid-column: 1; grid-row: 2; top: clamp(-32px, -2.2vw, -16px); transform: rotate(-10deg); }
 .ticket-projects:hover, .ticket-projects:focus-visible { transform: rotate(-10deg) translateY(-10px) scale(1.04); }
 .ticket-experience { grid-column: 2; grid-row: 1; top: 0; left: -5px; transform: rotate(-7deg); }
 .ticket-experience:hover, .ticket-experience:focus-visible { transform: rotate(-7deg) translateY(-10px) scale(1.04); }
 .ticket-github { grid-column: 3; grid-row: 1; top: 0; left: 5px; transform: rotate(7deg); }
 .ticket-github:hover, .ticket-github:focus-visible { transform: rotate(7deg) translateY(-10px) scale(1.04); }
-.ticket-education { grid-column: 4; grid-row: 2; transform: rotate(11deg); }
+.ticket-education { grid-column: 4; grid-row: 2; top: clamp(-32px, -2.2vw, -16px); transform: rotate(11deg); }
 .ticket-education:hover, .ticket-education:focus-visible { transform: rotate(11deg) translateY(-10px) scale(1.04); }
 .ticket-number {
   color: var(--red);
@@ -440,13 +444,13 @@ img { display: block; max-width: 100%; user-select: none; }
   .ticket::before, .ticket::after { width: 17px; height: 17px; border-width: 2px; }
   .ticket::before { left: -11px; }
   .ticket::after { right: -11px; }
-  .ticket-projects { grid-column: 1; grid-row: 2; transform: rotate(-5deg); }
+  .ticket-projects { grid-column: 1; grid-row: 2; top: -12px; transform: rotate(-5deg); }
   .ticket-projects:hover, .ticket-projects:focus-visible { transform: rotate(-5deg) translateY(-6px) scale(1.03); }
   .ticket-experience { grid-column: 1; grid-row: 1; top: 0; transform: rotate(-7deg); }
-  .ticket-experience:hover, .ticket-experience:focus-visible { transform: rotate(-5deg) translateY(-6px) scale(1.03); }
+  .ticket-experience:hover, .ticket-experience:focus-visible { transform: rotate(-7deg) translateY(-6px) scale(1.03); }
   .ticket-github { grid-column: 2; grid-row: 1; top: 0; transform: rotate(7deg); }
   .ticket-github:hover, .ticket-github:focus-visible { transform: rotate(7deg) translateY(-6px) scale(1.03); }
-  .ticket-education { grid-column: 2; grid-row: 2; transform: rotate(11deg); }
+  .ticket-education { grid-column: 2; grid-row: 2; top: -12px; transform: rotate(11deg); }
   .ticket-education:hover, .ticket-education:focus-visible { transform: rotate(11deg) translateY(-6px) scale(1.03); }
   .ticket-number { font-size: 10vw; }
   .ticket strong { margin-top: 3px; font-size: 3.6vw; }
